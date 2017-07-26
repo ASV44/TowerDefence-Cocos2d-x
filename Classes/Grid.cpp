@@ -42,9 +42,14 @@ Grid::Grid(Point startPoint, Point endPoint)
     for(int i = 0; i < width; i++) {
         cells[i] = new FieldCell*[height];
         for(int j = 0; j < height; j++) {
-            cells[i][j] = new FieldCell(Point(correction + j * cellSize.width,
+            cells[i][j] = new FieldCell(Vec2(i,j),
+                                        Point(correction + j * cellSize.width,
                                              startPoint.y + i * cellSize.height), cellSize);
             this->addChild(cells[i][j]);
         }
     }
+    
+    CCLOG("Start Point x:%f y:%f", startPoint.x, startPoint.y);
+    CCLOG("End Point x:%f y:%f", endPoint.x, endPoint.y);
+    CCLOG("Corrrection Point x:%f", correction);
 }

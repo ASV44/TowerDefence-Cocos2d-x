@@ -13,7 +13,7 @@ GameField::GameField()
 {
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    
+    //CCLOG("Origin x:%f y:%f", origin.x, origin.y);
     this->initWithFile("background.png");
     this->setPosition(Vec2(origin.x + visibleSize.width / 2,
                             origin.y + visibleSize.height / 2));
@@ -23,6 +23,7 @@ GameField::GameField()
     auto endPoint = Point(visibleSize.width, 0.835 * visibleSize.height);
     
     grid = new Grid(startPoint, endPoint);
+    grid->setVisible(false);
     this->addChild(grid);
 
     debugMode = false;
