@@ -21,16 +21,9 @@ bool MainScene::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    // add "MainScene" splash screen"
-    gameField = Sprite::create("background.png");
-
-    // position the sprite on the center of the screen
-    gameField->setAnchorPoint(Vec2(0,0));
-    gameField->setPosition(Vec2(origin.x, origin.y));
-    gameField->setContentSize(visibleSize);
-
-    // add the sprite as a child to this layer
-    this->addChild(gameField, 0);
+    gameField = new GameField(Point(0, 0.1375 * visibleSize.height),
+                              Point(visibleSize.width, 0.835 * visibleSize.height));
+    this->addChild(gameField);
     
     return true;
 }

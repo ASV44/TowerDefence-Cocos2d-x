@@ -2,6 +2,7 @@
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
+#include "GameFIeld.h"
 
 class MainScene : public cocos2d::Scene
 {
@@ -13,7 +14,7 @@ public:
     // implement the "static create()" method manually
     CREATE_FUNC(MainScene);
 private:
-    cocos2d::Sprite *gameField;
+    GameField *gameField;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

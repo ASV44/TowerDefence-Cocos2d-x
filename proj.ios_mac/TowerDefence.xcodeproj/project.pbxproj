@@ -68,6 +68,7 @@
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
 		D6B0611B1803AB670077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B0611A1803AB670077942B /* CoreMotion.framework */; };
+		D6B305EA1F2896750051AD20 /* GameField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6B305E91F2896750051AD20 /* GameField.cpp */; };
 		D6E538231F287DE700645DF8 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = D6E5381C1F287DE700645DF8 /* background.png */; };
 		D6E538241F287DE700645DF8 /* car.png in Resources */ = {isa = PBXBuildFile; fileRef = D6E5381D1F287DE700645DF8 /* car.png */; };
 		D6E538251F287DE700645DF8 /* ground_1.png in Resources */ = {isa = PBXBuildFile; fileRef = D6E5381E1F287DE700645DF8 /* ground_1.png */; };
@@ -177,6 +178,8 @@
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		D6B0611A1803AB670077942B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
+		D6B305E91F2896750051AD20 /* GameField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameField.cpp; sourceTree = "<group>"; };
+		D6B305EC1F2896990051AD20 /* GameFIeld.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameFIeld.h; sourceTree = "<group>"; };
 		D6E5381C1F287DE700645DF8 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		D6E5381D1F287DE700645DF8 /* car.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = car.png; sourceTree = "<group>"; };
 		D6E5381E1F287DE700645DF8 /* ground_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ground_1.png; sourceTree = "<group>"; };
@@ -334,6 +337,8 @@
 				46880B8519C43A87006E1F66 /* AppDelegate.h */,
 				46880B8619C43A87006E1F66 /* MainScene.cpp */,
 				46880B8719C43A87006E1F66 /* MainScene.h */,
+				D6B305E91F2896750051AD20 /* GameField.cpp */,
+				D6B305EC1F2896990051AD20 /* GameFIeld.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -541,6 +546,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6B305EA1F2896750051AD20 /* GameField.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				46880B8A19C43A87006E1F66 /* MainScene.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
