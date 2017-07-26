@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include "GameFIeld.h"
 
-GameField::GameField(Point startPoint, Point endPoint)
+GameField::GameField()
 {
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
@@ -18,39 +18,14 @@ GameField::GameField(Point startPoint, Point endPoint)
     this->setPosition(Vec2(origin.x + visibleSize.width / 2,
                             origin.y + visibleSize.height / 2));
     this->setContentSize(visibleSize);
+
+    auto startPoint = Point(0, 0.1375 * visibleSize.height);
+    auto endPoint = Point(visibleSize.width, 0.835 * visibleSize.height);
     
-    cellSize = Size(0.044 * visibleSize.width,
-                    0.0781 * visibleSize.height);
-    
-    _fieldSize.width = round((endPoint.y - startPoint.y) / cellSize.height);
-    _fieldSize.height = round((endPoint.x - startPoint.x) / cellSize.width);
-    
-    CCLOG("Field width:%f height:%f",_fieldSize.width, _fieldSize.height);
-    
-    foreground = DrawNode::create();
-    
-    auto width = int(_fieldSize.width);
-    auto height = int(_fieldSize.height);
-    
-    grid = new int*[width];
-    
-    auto correction = 0.0132 * visibleSize.width;
-    
-    for(int i = 0; i < width; i++) {
-        grid[i] = new int[height];
-        for(int j = 0; j < height; j++) {
-            auto cellLeftPoint = Vec2(correction + j * cellSize.width,
-                                      startPoint.y + i * cellSize.height);
-            
-            foreground->drawRect(cellLeftPoint,
-                                 cellLeftPoint + Vec2(cellSize),
-                                 Color4F(1,0,0,0.6f));
-        }
-    }
+    grid = new Grid(startPoint, endPoint);
+    this->addChild(grid);
 
     debugMode = false;
-    foreground->setVisible(false);
-    this->addChild(foreground);
     
     listener = EventListenerTouchOneByOne::create();
     
@@ -84,10 +59,10 @@ void GameField::longPress()
 {
     if(debugMode) {
         debugMode = false;
-        foreground->setVisible(false);
+        grid->setVisible(false);
     }
     else {
         debugMode = true;
-        foreground->setVisible(true);
+        grid->setVisible(true);
     }
 }

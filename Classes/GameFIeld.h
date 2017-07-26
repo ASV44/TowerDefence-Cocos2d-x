@@ -10,20 +10,19 @@
 #define GameFIeld_h
 
 #include <time.h>
+#include "Grid.h"
 
 USING_NS_CC;
 
 class GameField : public Sprite
 {
 public:
-    GameField(Point startPoint, Point endPoint);
+    GameField();
     
 private:
     Size _fieldSize;
     //Sprite *field;
-    int **grid;
-    Size cellSize;
-    DrawNode *foreground;
+    Grid *grid;
     bool debugMode;
     EventListenerTouchOneByOne *listener;
     float time;

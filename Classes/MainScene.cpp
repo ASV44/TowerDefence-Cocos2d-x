@@ -21,8 +21,7 @@ bool MainScene::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    gameField = new GameField(Point(0, 0.1375 * visibleSize.height),
-                              Point(visibleSize.width, 0.835 * visibleSize.height));
+    gameField = new GameField();
     this->addChild(gameField);
     
     return true;

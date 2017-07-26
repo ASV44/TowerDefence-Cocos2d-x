@@ -67,6 +67,8 @@
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
+		D642C81A1F293BEE00640FB8 /* Grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D642C8191F293BEE00640FB8 /* Grid.cpp */; };
+		D642C81C1F293C0400640FB8 /* FieldCell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D642C81B1F293C0400640FB8 /* FieldCell.cpp */; };
 		D6B0611B1803AB670077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B0611A1803AB670077942B /* CoreMotion.framework */; };
 		D6B305EA1F2896750051AD20 /* GameField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6B305E91F2896750051AD20 /* GameField.cpp */; };
 		D6E538231F287DE700645DF8 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = D6E5381C1F287DE700645DF8 /* background.png */; };
@@ -177,6 +179,10 @@
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		D642C8141F293BB100640FB8 /* Grid.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Grid.h; sourceTree = "<group>"; };
+		D642C8161F293BC600640FB8 /* FieldCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FieldCell.h; sourceTree = "<group>"; };
+		D642C8191F293BEE00640FB8 /* Grid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Grid.cpp; sourceTree = "<group>"; };
+		D642C81B1F293C0400640FB8 /* FieldCell.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FieldCell.cpp; sourceTree = "<group>"; };
 		D6B0611A1803AB670077942B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
 		D6B305E91F2896750051AD20 /* GameField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameField.cpp; sourceTree = "<group>"; };
 		D6B305EC1F2896990051AD20 /* GameFIeld.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameFIeld.h; sourceTree = "<group>"; };
@@ -339,6 +345,10 @@
 				46880B8719C43A87006E1F66 /* MainScene.h */,
 				D6B305E91F2896750051AD20 /* GameField.cpp */,
 				D6B305EC1F2896990051AD20 /* GameFIeld.h */,
+				D642C81B1F293C0400640FB8 /* FieldCell.cpp */,
+				D642C8161F293BC600640FB8 /* FieldCell.h */,
+				D642C8191F293BEE00640FB8 /* Grid.cpp */,
+				D642C8141F293BB100640FB8 /* Grid.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -548,9 +558,11 @@
 			files = (
 				D6B305EA1F2896750051AD20 /* GameField.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
+				D642C81C1F293C0400640FB8 /* FieldCell.cpp in Sources */,
 				46880B8A19C43A87006E1F66 /* MainScene.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
+				D642C81A1F293BEE00640FB8 /* Grid.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
