@@ -12,7 +12,7 @@
 GameField::GameField()
 {
     auto visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    origin = Director::getInstance()->getVisibleOrigin();
     //CCLOG("Origin x:%f y:%f", origin.x, origin.y);
     this->initWithFile("background.png");
     this->setPosition(Vec2(origin.x + visibleSize.width / 2,
@@ -30,7 +30,17 @@ GameField::GameField()
         changeMode();
     }
     grid->showGridState();
-    this->addChild(grid);
+    this->addChild(grid,3);
+    
+    stonesAmount = 3;
+    stones = new Sprite*[stonesAmount];
+    for(int i = 0; i < stonesAmount; ++i) {
+        stones[i] = Sprite::create("stone_" + to_string(i + 1) + ".png");
+        stones[i]->setAnchorPoint(Vec2(0,0));
+        setStonesLocation(i);
+        this->addChild(stones[i],2);
+    }
+    
     
     listener = EventListenerTouchOneByOne::create();
     
@@ -43,7 +53,9 @@ GameField::GameField()
     };
 
     listener->onTouchMoved = [&](Touch* touch, Event* event){
-
+//        auto location = touch->getLocation() - origin;
+//        stones[2]->setPosition(location);
+//        CCLOG("X:%f Y:%f",location.x, location.y);
         return true;
     };
     
@@ -70,5 +82,31 @@ void GameField::changeMode()
     else {
         debugMode = true;
         grid->setVisible(true);
+    }
+}
+
+void GameField::setStonesLocation(int stone)
+{
+    auto visibleSize = Director::getInstance()->getVisibleSize();
+    
+    switch (stone) {
+        case 0:
+            stones[stone]->setContentSize(Size(0.0387 * visibleSize.width,
+                                           0.0484 * visibleSize.height));
+            stones[stone]->setPosition(Vec2(83.074928, 116.650040));
+            break;
+        case 1:
+            stones[stone]->setContentSize(Size(0.0669 * visibleSize.width,
+                                               0.1703 * visibleSize.height));
+            stones[stone]->setPosition(Vec2(411.267273, 109.900589));
+            break;
+        case 2:
+            stones[stone]->setContentSize(Size(0.0589 * visibleSize.width,
+                                               0.142 * visibleSize.height));
+            stones[stone]->setPosition(Vec2(40.890820, 99.776390));
+            break;
+            
+        default:
+            break;
     }
 }

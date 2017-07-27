@@ -178,3 +178,11 @@ int Grid::getJsonLength(rapidjson::Document &jsonGrid)
     
     return length;
 }
+
+FieldCell* Grid::getCell(Point cell)
+{
+    int row = int(cell.x);
+    int column = int(cell.y);
+    
+    return this->cells[row][column];
+}

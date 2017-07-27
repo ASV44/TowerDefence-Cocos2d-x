@@ -27,6 +27,10 @@ private:
     EventListenerTouchOneByOne *listener;
     float time;
     void changeMode();
+    int stonesAmount;
+    Sprite **stones;
+    void setStonesLocation(int stone);
+    Vec2 origin;
 };
 
 

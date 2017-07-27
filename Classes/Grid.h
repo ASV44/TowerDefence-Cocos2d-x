@@ -31,6 +31,7 @@ public:
     string JsonToString(rapidjson::Document jsonGrid);
     bool importGridFromJson();
     void showGridState();
+    FieldCell *getCell(Point cell);
     
 private:
     FieldCell ***cells;

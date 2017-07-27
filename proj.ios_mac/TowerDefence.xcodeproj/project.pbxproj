@@ -67,15 +67,15 @@
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
+		D63F97C31F2A198300C6FB23 /* stone_1.png in Resources */ = {isa = PBXBuildFile; fileRef = D63F97C01F2A198300C6FB23 /* stone_1.png */; };
+		D63F97C41F2A198300C6FB23 /* stone_2.png in Resources */ = {isa = PBXBuildFile; fileRef = D63F97C11F2A198300C6FB23 /* stone_2.png */; };
+		D63F97C51F2A198300C6FB23 /* stone_3.png in Resources */ = {isa = PBXBuildFile; fileRef = D63F97C21F2A198300C6FB23 /* stone_3.png */; };
 		D642C81A1F293BEE00640FB8 /* Grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D642C8191F293BEE00640FB8 /* Grid.cpp */; };
 		D642C81C1F293C0400640FB8 /* FieldCell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D642C81B1F293C0400640FB8 /* FieldCell.cpp */; };
 		D6B0611B1803AB670077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B0611A1803AB670077942B /* CoreMotion.framework */; };
 		D6B305EA1F2896750051AD20 /* GameField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6B305E91F2896750051AD20 /* GameField.cpp */; };
 		D6E538231F287DE700645DF8 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = D6E5381C1F287DE700645DF8 /* background.png */; };
 		D6E538241F287DE700645DF8 /* car.png in Resources */ = {isa = PBXBuildFile; fileRef = D6E5381D1F287DE700645DF8 /* car.png */; };
-		D6E538251F287DE700645DF8 /* ground_1.png in Resources */ = {isa = PBXBuildFile; fileRef = D6E5381E1F287DE700645DF8 /* ground_1.png */; };
-		D6E538261F287DE700645DF8 /* ground_2.png in Resources */ = {isa = PBXBuildFile; fileRef = D6E5381F1F287DE700645DF8 /* ground_2.png */; };
-		D6E538271F287DE700645DF8 /* ground_3.png in Resources */ = {isa = PBXBuildFile; fileRef = D6E538201F287DE700645DF8 /* ground_3.png */; };
 		D6E538281F287DE700645DF8 /* tower_base.png in Resources */ = {isa = PBXBuildFile; fileRef = D6E538211F287DE700645DF8 /* tower_base.png */; };
 		D6E538291F287DE700645DF8 /* tower_weapon.png in Resources */ = {isa = PBXBuildFile; fileRef = D6E538221F287DE700645DF8 /* tower_weapon.png */; };
 		ED545A7C1B68A1F400C3958E /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED545A7B1B68A1F400C3958E /* libiconv.dylib */; };
@@ -179,6 +179,9 @@
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		D63F97C01F2A198300C6FB23 /* stone_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stone_1.png; sourceTree = "<group>"; };
+		D63F97C11F2A198300C6FB23 /* stone_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stone_2.png; sourceTree = "<group>"; };
+		D63F97C21F2A198300C6FB23 /* stone_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stone_3.png; sourceTree = "<group>"; };
 		D642C8141F293BB100640FB8 /* Grid.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Grid.h; sourceTree = "<group>"; };
 		D642C8161F293BC600640FB8 /* FieldCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FieldCell.h; sourceTree = "<group>"; };
 		D642C8191F293BEE00640FB8 /* Grid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Grid.cpp; sourceTree = "<group>"; };
@@ -188,9 +191,6 @@
 		D6B305EC1F2896990051AD20 /* GameFIeld.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameFIeld.h; sourceTree = "<group>"; };
 		D6E5381C1F287DE700645DF8 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		D6E5381D1F287DE700645DF8 /* car.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = car.png; sourceTree = "<group>"; };
-		D6E5381E1F287DE700645DF8 /* ground_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ground_1.png; sourceTree = "<group>"; };
-		D6E5381F1F287DE700645DF8 /* ground_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ground_2.png; sourceTree = "<group>"; };
-		D6E538201F287DE700645DF8 /* ground_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ground_3.png; sourceTree = "<group>"; };
 		D6E538211F287DE700645DF8 /* tower_base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tower_base.png; sourceTree = "<group>"; };
 		D6E538221F287DE700645DF8 /* tower_weapon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tower_weapon.png; sourceTree = "<group>"; };
 		ED545A7B1B68A1F400C3958E /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.4.sdk/usr/lib/libiconv.dylib; sourceTree = DEVELOPER_DIR; };
@@ -326,11 +326,11 @@
 				46880B7A19C43A67006E1F66 /* HelloWorld.png */,
 				D6E5381C1F287DE700645DF8 /* background.png */,
 				D6E5381D1F287DE700645DF8 /* car.png */,
-				D6E5381E1F287DE700645DF8 /* ground_1.png */,
-				D6E5381F1F287DE700645DF8 /* ground_2.png */,
-				D6E538201F287DE700645DF8 /* ground_3.png */,
 				D6E538211F287DE700645DF8 /* tower_base.png */,
 				D6E538221F287DE700645DF8 /* tower_weapon.png */,
+				D63F97C01F2A198300C6FB23 /* stone_1.png */,
+				D63F97C11F2A198300C6FB23 /* stone_2.png */,
+				D63F97C21F2A198300C6FB23 /* stone_3.png */,
 			);
 			name = Resources;
 			path = ../Resources;
@@ -505,10 +505,8 @@
 			files = (
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
 				D6E538231F287DE700645DF8 /* background.png in Resources */,
-				D6E538251F287DE700645DF8 /* ground_1.png in Resources */,
 				D6E538291F287DE700645DF8 /* tower_weapon.png in Resources */,
 				D6E538241F287DE700645DF8 /* car.png in Resources */,
-				D6E538271F287DE700645DF8 /* ground_3.png in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
@@ -520,13 +518,15 @@
 				521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */,
 				521A8EA919F11F5000D177D7 /* fonts in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
+				D63F97C31F2A198300C6FB23 /* stone_1.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
+				D63F97C41F2A198300C6FB23 /* stone_2.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
+				D63F97C51F2A198300C6FB23 /* stone_3.png in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
 				3EACC98F19EE6D4300EB3C5E /* res in Resources */,
 				D6E538281F287DE700645DF8 /* tower_base.png in Resources */,
-				D6E538261F287DE700645DF8 /* ground_2.png in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
