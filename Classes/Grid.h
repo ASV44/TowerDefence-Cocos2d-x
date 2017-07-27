@@ -10,7 +10,13 @@
 #define Grid_h
 
 #include "FieldCell.h"
+#include "external/json/document.h"
+#include <fstream>
+#include "external/json/stringbuffer.h"
+#include "external/json/writer.h"
+#include <string> 
 
+using namespace std;
 USING_NS_CC;
 
 class Grid : public Node {
@@ -21,9 +27,17 @@ public:
     CC_SYNTHESIZE(Size, cellSize, CellSize);
     CC_SYNTHESIZE(Point, startPoint, StartPoint);
     CC_SYNTHESIZE(Point, endPoint, EndPoint);
+    void exportGrid();
+    string JsonToString(rapidjson::Document jsonGrid);
+    bool importGridFromJson();
+    void showGridState();
     
 private:
     FieldCell ***cells;
+    rapidjson::Document createJSON();
+    rapidjson::Document readJSON();
+    int getJsonLength(rapidjson::Document &jsonGrid);
+    
 };
 
 #endif /* Grid_h */

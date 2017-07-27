@@ -22,11 +22,15 @@ GameField::GameField()
     auto startPoint = Point(0, 0.1375 * visibleSize.height);
     auto endPoint = Point(visibleSize.width, 0.835 * visibleSize.height);
     
+    debugMode = false;
+    
     grid = new Grid(startPoint, endPoint);
     grid->setVisible(false);
+    if(!grid->importGridFromJson()) {
+        changeMode();
+    }
+    grid->showGridState();
     this->addChild(grid);
-
-    debugMode = false;
     
     listener = EventListenerTouchOneByOne::create();
     
@@ -48,7 +52,7 @@ GameField::GameField()
         time  = (clock() - time) / CLOCKS_PER_SEC;
         CCLOG("Time %f", time);
         if(time >= 0.8) {
-            longPress();
+            changeMode();
         }
         return true;
     };
@@ -56,10 +60,11 @@ GameField::GameField()
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 }
 
-void GameField::longPress()
+void GameField::changeMode()
 {
     if(debugMode) {
         debugMode = false;
+        grid->exportGrid();
         grid->setVisible(false);
     }
     else {

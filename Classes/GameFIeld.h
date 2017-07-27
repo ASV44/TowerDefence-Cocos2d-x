@@ -26,7 +26,7 @@ private:
     bool debugMode;
     EventListenerTouchOneByOne *listener;
     float time;
-    void longPress();
+    void changeMode();
 };
 
 
