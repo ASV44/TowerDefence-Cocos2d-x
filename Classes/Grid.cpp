@@ -49,7 +49,7 @@ Grid::Grid(Point startPoint, Point endPoint)
             this->addChild(cells[i][j]);
         }
     }
-    
+    this->setGlobalZOrder(100);
     
     CCLOG("Start Point x:%f y:%f", startPoint.x, startPoint.y);
     CCLOG("End Point x:%f y:%f", endPoint.x, endPoint.y);

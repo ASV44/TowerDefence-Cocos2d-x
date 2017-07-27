@@ -17,10 +17,13 @@ FieldCell::FieldCell(Vec2 position, Point location, Size cellSize)
     this->cellSize = cellSize;
     this->position = position;
     
+    this->centerLocation = location + Point(cellSize) / 2;
     this->state = 0;
     this->drawRect(location,
                    location + Vec2(cellSize),
                    Color4F(1,0,0,0.6f));
+    
+    this->setGlobalZOrder(100);
     
     listener = EventListenerTouchOneByOne::create();
     

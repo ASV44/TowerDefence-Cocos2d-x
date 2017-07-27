@@ -24,5 +24,14 @@ bool MainScene::init()
     gameField = new GameField();
     this->addChild(gameField);
     
+    tank = new Tank(gameField->getGrid());
+    this->addChild(tank);
+    
+    this->scheduleUpdate();
+    CCLOG("Scene globa Z %f",this->getGlobalZOrder());
     return true;
+}
+
+void MainScene::update(float delta) {
+    tank->move();
 }

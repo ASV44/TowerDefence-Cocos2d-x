@@ -18,6 +18,7 @@ class GameField : public Sprite
 {
 public:
     GameField();
+    Grid *getGrid();
     
 private:
     Size _fieldSize;

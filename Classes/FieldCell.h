@@ -19,6 +19,7 @@ public:
     CC_SYNTHESIZE(Vec2, position, CellPosition);
     CC_SYNTHESIZE(Point, location, Location);
     CC_SYNTHESIZE(Size, cellSize, CellSize);
+    CC_SYNTHESIZE(Point, centerLocation, CenterLocation);
     void changeState();
 
 private:

@@ -3,18 +3,20 @@
 
 #include "cocos2d.h"
 #include "GameFIeld.h"
+#include "Tank.h"
 
 class MainScene : public cocos2d::Scene
 {
 public:
     static cocos2d::Scene* createScene();
-
+    void update(float delta);
     virtual bool init();
     
     // implement the "static create()" method manually
     CREATE_FUNC(MainScene);
 private:
     GameField *gameField;
+    Tank *tank;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

@@ -30,7 +30,12 @@ GameField::GameField()
         changeMode();
     }
     grid->showGridState();
-    this->addChild(grid,3);
+    this->setGlobalZOrder(5);
+    CCLOG("GameField globa Z %f",this->getGlobalZOrder());
+    //grid->setGlobalZOrder();
+    CCLOG("Grid globa Z %f",grid->getGlobalZOrder());
+    this->addChild(grid);
+    CCLOG("Grid globa Z %f",grid->getGlobalZOrder());
     
     stonesAmount = 3;
     stones = new Sprite*[stonesAmount];
@@ -38,7 +43,8 @@ GameField::GameField()
         stones[i] = Sprite::create("stone_" + to_string(i + 1) + ".png");
         stones[i]->setAnchorPoint(Vec2(0,0));
         setStonesLocation(i);
-        this->addChild(stones[i],2);
+        this->addChild(stones[i]);
+        stones[i]->setGlobalZOrder(50);
     }
     
     
@@ -109,4 +115,9 @@ void GameField::setStonesLocation(int stone)
         default:
             break;
     }
+}
+
+Grid* GameField::getGrid()
+{
+    return this->grid;
 }
