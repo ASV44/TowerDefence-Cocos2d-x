@@ -11,6 +11,8 @@
 
 #include "Grid.h"
 
+using namespace std;
+
 USING_NS_CC;
 
 class Tank: public Sprite
@@ -18,6 +20,8 @@ class Tank: public Sprite
 public:
     Tank(Grid *grid);
     void move();
+    void moveTo(Point target);
+    Point getTarget(Point previousPosition);
     
 private:
     Grid *grid;
@@ -26,6 +30,9 @@ private:
     float speed;
     float angle;
     Point target;
+    Point finish;
+    FieldCell *getNeighbour(int neighbourCase);
+    Vec2 origin;
 };
 
 #endif /* Tank_h */

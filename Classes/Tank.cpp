@@ -14,22 +14,142 @@ Tank::Tank(Grid *grid)
     this->grid = grid;
     
     auto visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    origin = Director::getInstance()->getVisibleOrigin();
     
     this->initWithFile("tank.png");
     this->setContentSize(Size(0.03785 * visibleSize.width,
                               0.06406 * visibleSize.height));
     this->gridPosition = Point(4,0);
+    this->target = Point(4,1);
     this->setPosition(Point(origin.x,
-                            origin.y + grid->getCell(gridPosition)->getCenterLocation().y));
-    
+                            origin.y + grid->getCell(target)->getCenterLocation().y));
     this->health = 100;
     this->angle = 0;
-    this->target = Point(4,22);
+    this->finish = Point(4,22);
     this->setGlobalZOrder(25);
+    
+    CCLOG("Target x:%f y:%f",grid->getCell(target)->getCenterLocation().x,grid->getCell(target)->getCenterLocation().y);
 };
 
 void Tank::move()
 {
-    this->setPositionX(getPositionX() + 1);
+    auto position = this->getPosition() - origin;
+    CCLOG("Current Position x:%f y:%f", position.x, position.y);
+    auto targetLocation = grid->getCell(this->target)->getCenterLocation();
+    if(round(position.x) != round(targetLocation.x) ||
+       round(position.y) != round(targetLocation.y)) {
+        moveTo(this->target);
+    }
+    else {
+        auto previousPosition = gridPosition;
+        gridPosition = target;
+        target = getTarget(previousPosition);
+    }
+    
 }
+
+void Tank::moveTo(Point target)
+{
+    auto deltaPosition = gridPosition - target;
+    
+    switch (int(deltaPosition.x)) {
+        case 0:
+            if(angle != 0) {
+                angle = 0;
+                this->setRotation(angle);
+            }
+            this->setPositionX(getPositionX() + 1);
+            break;
+        case -1:
+            if(angle != 90) {
+                angle = 90;
+                this->setRotation(angle);
+            }
+            this->setPositionY(getPositionY() + 1);
+            break;
+        case 1:
+            if(angle != -90) {
+                angle = -90;
+                this->setRotation(angle);
+            }
+            this->setPositionY(getPositionY() - 1);
+            break;
+        default:
+            break;
+    }
+}
+
+Point Tank::getTarget(Point previousPosition)
+{
+    //vector<Point> newTargets;
+    Point newTarget = gridPosition;
+    auto minRelativeDistance = grid->getGridSize().width + grid->getGridSize().height;
+    
+    for(int i = 0; i < 4; i++) {
+        auto nextTarget = getNeighbour(i);
+        if(nextTarget->getState() != 0 &&
+           nextTarget->getCellPosition() != previousPosition) {
+            
+            auto deltaPosition = nextTarget->getCellPosition() - gridPosition;
+            auto relativeDistance = abs(deltaPosition.x) + abs(deltaPosition.y);
+            if(relativeDistance < minRelativeDistance) {
+                minRelativeDistance = relativeDistance;
+                newTarget = nextTarget->getCellPosition();
+            }
+            
+        }
+    }
+    
+    return newTarget;
+}
+
+FieldCell* Tank::getNeighbour(int neighbourCase)
+{
+    switch (neighbourCase) {
+        case 0:
+            return grid->getCell(Point(gridPosition.x,
+                                       gridPosition.y + 1));
+            break;
+        case 1:
+            return grid->getCell(Point(gridPosition.x,
+                                       gridPosition.y - 1));
+            break;
+        case 2:
+            return grid->getCell(Point(gridPosition.x + 1,
+                                       gridPosition.y));
+            break;
+        case 3:
+            return grid->getCell(Point(gridPosition.x - 1,
+                                       gridPosition.y));
+            break;
+        default:
+            return NULL;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

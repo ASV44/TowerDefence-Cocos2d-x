@@ -15,7 +15,7 @@ FieldCell::FieldCell(Vec2 position, Point location, Size cellSize)
     
     this->location = location;
     this->cellSize = cellSize;
-    this->position = position;
+    this->gridPosition = position;
     
     this->centerLocation = location + Point(cellSize) / 2;
     this->state = 0;
@@ -41,9 +41,9 @@ FieldCell::FieldCell(Vec2 position, Point location, Size cellSize)
     };
     
     listener->onTouchEnded = [&](Touch* touch, Event* event){
-        if(isCellTouched(touch->getStartLocation())) {
-            auto row = int(this->position.x);
-            auto column = int(this->position.y);
+        if(inCell(touch->getStartLocation())) {
+            auto row = int(this->gridPosition.x);
+            auto column = int(this->gridPosition.y);
             CCLOG("Cell Field row:%d column:%d Touch Ended",row,column);
             changeState();
         }
@@ -53,7 +53,7 @@ FieldCell::FieldCell(Vec2 position, Point location, Size cellSize)
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 }
 
-bool FieldCell::isCellTouched(Point touchPoint)
+bool FieldCell::inCell(Point touchPoint)
 {
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     touchPoint = touchPoint - origin;
