@@ -9,6 +9,8 @@
 #ifndef FieldCell_h
 #define FieldCell_h
 
+#include <time.h>
+
 USING_NS_CC;
 
 class FieldCell : public DrawNode
@@ -20,11 +22,15 @@ public:
     CC_SYNTHESIZE(Point, location, Location);
     CC_SYNTHESIZE(Size, cellSize, CellSize);
     CC_SYNTHESIZE(Point, centerLocation, CenterLocation);
+    CC_SYNTHESIZE(int, editMode, EditMode);
     void changeState();
     bool inCell(Point touchPoint);
+    void putWeapon();
+    enum editMode {EDIT_ROAD, EDIT_WEAPON};
 
 private:
     EventListenerTouchOneByOne *listener;
+    float time;
 };
 
 #endif /* FieldCell_h */

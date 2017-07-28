@@ -34,7 +34,6 @@ Grid::Grid(Point startPoint, Point endPoint)
     
     auto width = int(size.width);
     auto height = int(size.height);
-    
     cellSize = Size(0.044 * visibleSize.width,
                     0.0781 * visibleSize.height);
     
@@ -50,10 +49,61 @@ Grid::Grid(Point startPoint, Point endPoint)
         }
     }
     this->setGlobalZOrder(100);
+    editMode = FieldCell::EDIT_ROAD;
+    editToolsAMount = 2;
+    editTools = new Sprite*[editToolsAMount];
+    for(int i = 0; i < editToolsAMount; ++i) {
+        editTools[i] = getEditTool(i);
+        editTools[i]->setPosition(Vec2(origin.x + (0.625 + i * 0.1041) * visibleSize.width,
+                                      origin.y - 0.0258 * visibleSize.height));
+        editTools[i]->setContentSize(Size(0.066 * visibleSize.width,
+                                          0.1171 * visibleSize.height));
+        editTools[i]->setGlobalZOrder(100);
+        this->addChild(editTools[i]);
+    }
+    selectedEdit = Sprite::create("selectedEdit.png");
+    selectedEdit->setContentSize(Size(0.066 * visibleSize.width,
+                                      0.1171 * visibleSize.height));
+    selectedEdit->setPosition(editTools[editMode]->getPosition());
+    selectedEdit->setGlobalZOrder(99);
+    this->addChild(selectedEdit);
     
+    
+    listener = EventListenerTouchOneByOne::create();
+    //listener->setSwallowTouches(true);
+    
+    listener->onTouchBegan = [&](Touch* touch, Event* event){
+        // your code
+        log("Game Field Touch Began");
+        return true; // if you are consuming it
+    };
+    
+    listener->onTouchMoved = [&](Touch* touch, Event* event){
+        return true;
+    };
+    
+    listener->onTouchEnded = [&](Touch* touch, Event* event){
+        if(this->isVisible()) {
+            for(int i = 0; i < editToolsAMount; ++i) {
+                if(isEditToolTouch(editTools[i], touch->getStartLocation()) &&
+                   editMode != i) {
+                    editMode = i;
+                    selectedEdit->setPosition(editTools[i]->getPosition());
+                    this->setCellsEditMode();
+                }
+            }
+        }
+        return true;
+    };
+    
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
+    
+    CCLOG("Visible Size x:%f y:%f", visibleSize.width, visibleSize.height);
     CCLOG("Start Point x:%f y:%f", startPoint.x, startPoint.y);
     CCLOG("End Point x:%f y:%f", endPoint.x, endPoint.y);
     CCLOG("Corrrection Point x:%f", correction);
+    CCLOG("Cell Size x:%f y:%f", cellSize.width, cellSize.height);
 }
 
 rapidjson::Document Grid::createJSON()
@@ -185,4 +235,48 @@ FieldCell* Grid::getCell(Point cell)
     int column = int(cell.y);
     
     return this->cells[row][column];
+}
+
+Sprite* Grid::getEditTool(int editMode) {
+    switch (editMode) {
+        case FieldCell::EDIT_ROAD:
+            return Sprite::create("road.png");
+            break;
+        case FieldCell::EDIT_WEAPON:
+            return Sprite::create("weapon.png");
+            break;
+        default:
+            return NULL;
+            break;
+    }
+}
+
+bool Grid::isEditToolTouch(Sprite *editTool, Point touchPoint)
+{
+    bool isTouched = false;
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    touchPoint = touchPoint - origin;
+    
+    auto halfSize = editTool->getContentSize() / 2;
+    auto lowerBound = editTool->getPosition() - halfSize;
+    auto upperBound = editTool->getPosition() + halfSize;
+    
+    if(touchPoint.x <= upperBound.x && touchPoint.y <= upperBound.y &&
+       touchPoint.x >= lowerBound.x && touchPoint.y >= lowerBound.y) {
+        isTouched = true;
+    }
+    
+    return isTouched;
+}
+
+void Grid::setCellsEditMode()
+{
+    auto width = int(size.width);
+    auto height = int(size.height);
+    
+    for(int i = 0; i < width; i++) {
+        for(int j = 0; j < height; j++) {
+            cells[i][j]->setEditMode(editMode);
+        }
+    }
 }

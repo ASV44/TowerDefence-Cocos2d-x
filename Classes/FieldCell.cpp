@@ -25,12 +25,15 @@ FieldCell::FieldCell(Vec2 position, Point location, Size cellSize)
     
     this->setGlobalZOrder(100);
     
-    listener = EventListenerTouchOneByOne::create();
+    editMode = EDIT_ROAD;
     
+    listener = EventListenerTouchOneByOne::create();
+
     listener->onTouchBegan = [&](Touch* touch, Event* event){
         // your code
-//        auto row = int(this->position.x);
-//        auto column = int(this->position.y);
+        time = clock();
+//        auto row = int(this->gridPosition.x);
+//        auto column = int(this->gridPosition.y);
 //        CCLOG("Cell Field row:%d column:%d Touch Began",row,column);
         return true; // if you are consuming it
     };
@@ -41,11 +44,19 @@ FieldCell::FieldCell(Vec2 position, Point location, Size cellSize)
     };
     
     listener->onTouchEnded = [&](Touch* touch, Event* event){
-        if(inCell(touch->getStartLocation())) {
-            auto row = int(this->gridPosition.x);
-            auto column = int(this->gridPosition.y);
-            CCLOG("Cell Field row:%d column:%d Touch Ended",row,column);
-            changeState();
+        auto parent = this->getParent();
+        if(inCell(touch->getStartLocation()) &&
+           parent->isVisible()) {
+            time  = (clock() - time) / CLOCKS_PER_SEC;
+            if(editMode == EDIT_WEAPON) {
+                putWeapon();
+            }
+            else if(editMode == EDIT_ROAD) {
+                auto row = int(this->gridPosition.x);
+                auto column = int(this->gridPosition.y);
+                CCLOG("Cell Field row:%d column:%d Touch Ended",row,column);
+                changeState();
+            }
         }
         return true;
     };
@@ -72,18 +83,57 @@ bool FieldCell::inCell(Point touchPoint)
 
 void FieldCell::changeState()
 {
-    if(state == 0) {
-        state = 1;
-        this->clear();
-        this->drawSolidRect(location,
-                            location + Vec2(cellSize),
-                            Color4F(1,0,0,0.6f));
+    switch (state) {
+        case 0:
+            state = 1;
+            this->clear();
+            this->drawSolidRect(location,
+                                location + Vec2(cellSize),
+                                Color4F(1,0,0,0.6f));
+            break;
+        case 1:
+            state = 0;
+            this->clear();
+            this->drawRect(location,
+                           location + Vec2(cellSize),
+                           Color4F(1,0,0,0.6f));
+            break;
+        default:
+            break;
     }
-    else {
-        state = 0;
-        this->clear();
-        this->drawRect(location,
-                       location + Vec2(cellSize),
-                       Color4F(1,0,0,0.6f));
+//    if(state == 0) {
+//        state = 1;
+//        this->clear();
+//        this->drawSolidRect(location,
+//                            location + Vec2(cellSize),
+//                            Color4F(1,0,0,0.6f));
+//    }
+//    else {
+//        state = 0;
+//        this->clear();
+//        this->drawRect(location,
+//                       location + Vec2(cellSize),
+//                       Color4F(1,0,0,0.6f));
+//    }
+}
+
+void FieldCell::putWeapon()
+{
+    switch (state) {
+        case 0:
+            state = 2;
+            this->clear();
+            this->drawSolidRect(location,
+                                location + Vec2(cellSize),
+                                Color4F(0,0,1,0.6f));
+            break;
+        case 2:
+            state = 0;
+            this->clear();
+            this->drawSolidRect(location,
+                                location + Vec2(cellSize),
+                                Color4F(0,0,1,0.6f));
+        default:
+            break;
     }
 }

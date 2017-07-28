@@ -34,7 +34,7 @@ GameField::GameField()
     CCLOG("GameField globa Z %f",this->getGlobalZOrder());
     //grid->setGlobalZOrder();
     CCLOG("Grid globa Z %f",grid->getGlobalZOrder());
-    this->addChild(grid);
+    this->addChild(grid,3);
     CCLOG("Grid globa Z %f",grid->getGlobalZOrder());
     
     stonesAmount = 3;
@@ -43,13 +43,13 @@ GameField::GameField()
         stones[i] = Sprite::create("stone_" + to_string(i + 1) + ".png");
         stones[i]->setAnchorPoint(Vec2(0,0));
         setStonesLocation(i);
-        this->addChild(stones[i]);
+        this->addChild(stones[i],2);
         stones[i]->setGlobalZOrder(50);
     }
     
     
     listener = EventListenerTouchOneByOne::create();
-    
+    //listener->setSwallowTouches(true);
     
     listener->onTouchBegan = [&](Touch* touch, Event* event){
         // your code
