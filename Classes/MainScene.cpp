@@ -36,9 +36,10 @@ bool MainScene::init()
             auto cell = gameField->getGrid()->getCell(Point(i,j));
             if(cell->getState() == 2)
             {
-                auto weapon = new Weapon(cell->getCenterLocation() + origin);
+                auto weapon = new Weapon(gameField->getGrid(), Point(i,j));
                 weapons.push_back(weapon);
                 this->addChild(weapon);
+                this->addChild(weapon->getBase());
             }
         }
     }
@@ -50,4 +51,8 @@ bool MainScene::init()
 
 void MainScene::update(float delta) {
     tank->move();
+    for(int i = 0; i < weapons.size(); i++)
+    {
+        weapons[i]->rotate();
+    }
 }
