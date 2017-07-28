@@ -10,6 +10,7 @@
 #define Tank_h
 
 #include "Grid.h"
+#include <ctime>
 
 using namespace std;
 
