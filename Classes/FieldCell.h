@@ -17,7 +17,7 @@ class FieldCell : public DrawNode
 {
 public:
     FieldCell(Vec2 position, Point location, Size cellSize);
-    CC_SYNTHESIZE(int, state, State);
+    //CC_SYNTHESIZE(int, state, State);
     CC_SYNTHESIZE(Vec2, gridPosition, CellPosition);
     CC_SYNTHESIZE(Point, location, Location);
     CC_SYNTHESIZE(Size, cellSize, CellSize);
@@ -27,8 +27,11 @@ public:
     bool inCell(Point touchPoint);
     void putWeapon();
     enum editMode {EDIT_ROAD, EDIT_WEAPON};
+    void setState(int state);
+    int getState();
 
 private:
+    int state;
     EventListenerTouchOneByOne *listener;
     float time;
 };

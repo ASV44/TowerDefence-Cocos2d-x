@@ -15,10 +15,10 @@ USING_NS_CC;
 class Weapon : public Sprite
 {
 public:
-    
+    Weapon(Point location);
     
 private:
-    Sprite base;
+    Sprite *base;
     float angle;
 };
 

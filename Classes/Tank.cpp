@@ -98,7 +98,7 @@ Point Tank::getTarget(Point previousPosition)
     
     for(int i = 0; i < 4; i++) {
         auto nextTarget = getNeighbour(i);
-        if(nextTarget->getState() != 0 &&
+        if(nextTarget->getState() == 1 &&
            nextTarget->getCellPosition() != previousPosition) {
             auto deltaPosition = finish - nextTarget->getCellPosition();
             auto relativeDistance = abs(deltaPosition.x) + abs(deltaPosition.y);

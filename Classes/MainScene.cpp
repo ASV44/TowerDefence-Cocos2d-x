@@ -27,6 +27,22 @@ bool MainScene::init()
     tank = new Tank(gameField->getGrid());
     this->addChild(tank);
     
+    auto gridSize = gameField->getGrid()->getGridSize();
+    auto width = int(gridSize.width);
+    auto height = int(gridSize.height);
+    
+    for(int i = 0; i < width; i++) {
+        for(int j = 0; j < height; j++) {
+            auto cell = gameField->getGrid()->getCell(Point(i,j));
+            if(cell->getState() == 2)
+            {
+                auto weapon = new Weapon(cell->getCenterLocation() + origin);
+                weapons.push_back(weapon);
+                this->addChild(weapon);
+            }
+        }
+    }
+    
     this->scheduleUpdate();
     CCLOG("Scene globa Z %f",this->getGlobalZOrder());
     return true;

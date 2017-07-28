@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "GameFIeld.h"
 #include "Tank.h"
+#include "Weapon.h"
 
 class MainScene : public cocos2d::Scene
 {
@@ -17,6 +18,7 @@ public:
 private:
     GameField *gameField;
     Tank *tank;
+    vector<Weapon*> weapons;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

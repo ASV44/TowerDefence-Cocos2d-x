@@ -188,7 +188,7 @@ bool Grid::importGridFromJson()
             assert(rowValues.IsArray());
             for(int j = 0; j < height; j++) {
                 if(cells[i][j]->getState() != rowValues[j].GetInt()) {
-                    cells[i][j]->changeState();
+                    cells[i][j]->setState(rowValues[j].GetInt());
                 }
             }
         }

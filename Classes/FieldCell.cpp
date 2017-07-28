@@ -137,3 +137,25 @@ void FieldCell::putWeapon()
             break;
     }
 }
+
+int FieldCell::getState() { return this->state; }
+
+void FieldCell::setState(int state)
+{
+    this->clear();
+    switch (state) {
+        case 1:
+            this->drawSolidRect(location,
+                                location + Vec2(cellSize),
+                                Color4F(1,0,0,0.6f));
+            break;
+        case 2:
+            this->drawSolidRect(location,
+                                location + Vec2(cellSize),
+                                Color4F(0,0,1,0.6f));
+            break;
+        default:
+            break;
+    }
+    this->state = state;
+}
