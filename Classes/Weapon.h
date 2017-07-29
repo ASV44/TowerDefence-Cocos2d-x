@@ -10,6 +10,7 @@
 #define Weapon_h
 
 #include "Grid.h"
+#include "Bullet.h"
 
 USING_NS_CC;
 
@@ -19,6 +20,10 @@ public:
     Weapon(Grid *grid ,Point griPosition);
     Sprite *getBase();
     void rotate();
+    Point findTarget();
+    float distanceTo(Point target);
+    void update(float delta);
+    void fire(Point target);
     
 private:
     Grid *grid;
@@ -26,6 +31,7 @@ private:
     Sprite *base;
     float angle;
     float activeRadius;
+    vector<Bullet*> bullets;
 };
 
 #endif /* Weapon_h */

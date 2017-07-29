@@ -23,15 +23,15 @@ FieldCell::FieldCell(Vec2 position, Point location, Size cellSize)
                    location + Vec2(cellSize),
                    Color4F(1,0,0,0.6f));
     
-    this->setGlobalZOrder(100);
+    //this->setGlobalZOrder(100);
     
     editMode = EDIT_ROAD;
+    tankState = false;
     
     listener = EventListenerTouchOneByOne::create();
 
     listener->onTouchBegan = [&](Touch* touch, Event* event){
         // your code
-        time = clock();
 //        auto row = int(this->gridPosition.x);
 //        auto column = int(this->gridPosition.y);
 //        CCLOG("Cell Field row:%d column:%d Touch Began",row,column);
@@ -47,7 +47,6 @@ FieldCell::FieldCell(Vec2 position, Point location, Size cellSize)
         auto parent = this->getParent();
         if(inCell(touch->getStartLocation()) &&
            parent->isVisible()) {
-            time  = (clock() - time) / CLOCKS_PER_SEC;
             if(editMode == EDIT_WEAPON) {
                 putWeapon();
             }
@@ -119,20 +118,19 @@ void FieldCell::changeState()
 
 void FieldCell::putWeapon()
 {
+    this->clear();
     switch (state) {
         case 0:
             state = 2;
-            this->clear();
             this->drawSolidRect(location,
                                 location + Vec2(cellSize),
                                 Color4F(0,0,1,0.6f));
             break;
         case 2:
             state = 0;
-            this->clear();
-            this->drawSolidRect(location,
-                                location + Vec2(cellSize),
-                                Color4F(0,0,1,0.6f));
+            this->drawRect(location,
+                           location + Vec2(cellSize),
+                           Color4F(1,0,0,0.6f));
         default:
             break;
     }

@@ -19,6 +19,8 @@ class GameField : public Sprite
 public:
     GameField();
     Grid *getGrid();
+    bool isOnDebug();
+    void addFieldStones();
     
 private:
     Size _fieldSize;

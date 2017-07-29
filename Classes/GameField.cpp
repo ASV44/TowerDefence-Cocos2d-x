@@ -30,7 +30,7 @@ GameField::GameField()
         changeMode();
     }
     grid->showGridState();
-    this->setGlobalZOrder(5);
+    //this->setGlobalZOrder(5);
     CCLOG("GameField globa Z %f",this->getGlobalZOrder());
     //grid->setGlobalZOrder();
     CCLOG("Grid globa Z %f",grid->getGlobalZOrder());
@@ -39,13 +39,6 @@ GameField::GameField()
     
     stonesAmount = 3;
     stones = new Sprite*[stonesAmount];
-    for(int i = 0; i < stonesAmount; ++i) {
-        stones[i] = Sprite::create("stone_" + to_string(i + 1) + ".png");
-        stones[i]->setAnchorPoint(Vec2(0,0));
-        setStonesLocation(i);
-        this->addChild(stones[i],2);
-        stones[i]->setGlobalZOrder(50);
-    }
     
     
     listener = EventListenerTouchOneByOne::create();
@@ -99,17 +92,17 @@ void GameField::setStonesLocation(int stone)
         case 0:
             stones[stone]->setContentSize(Size(0.0387 * visibleSize.width,
                                            0.0484 * visibleSize.height));
-            stones[stone]->setPosition(Vec2(83.074928, 116.650040));
+            stones[stone]->setPosition(Vec2(origin.x + 83.074928, origin.y + 116.650040));
             break;
         case 1:
             stones[stone]->setContentSize(Size(0.0669 * visibleSize.width,
                                                0.1703 * visibleSize.height));
-            stones[stone]->setPosition(Vec2(411.267273, 109.900589));
+            stones[stone]->setPosition(Vec2(origin.x + 411.267273, origin.y + 109.900589));
             break;
         case 2:
             stones[stone]->setContentSize(Size(0.0589 * visibleSize.width,
                                                0.142 * visibleSize.height));
-            stones[stone]->setPosition(Vec2(40.890820, 99.776390));
+            stones[stone]->setPosition(Vec2(origin.x + 40.890820, origin.y + 99.776390));
             break;
             
         default:
@@ -120,4 +113,22 @@ void GameField::setStonesLocation(int stone)
 Grid* GameField::getGrid()
 {
     return this->grid;
+}
+
+bool GameField::isOnDebug()
+{
+    return debugMode;
+}
+
+void GameField::addFieldStones()
+{
+    if(this->getParent() != NULL) {
+        for(int i = 0; i < stonesAmount; ++i) {
+            stones[i] = Sprite::create("stone_" + to_string(i + 1) + ".png");
+            stones[i]->setAnchorPoint(Vec2(0,0));
+            setStonesLocation(i);
+            this->getParent()->addChild(stones[i]);
+            //stones[i]->setGlobalZOrder(50);
+        }
+    }
 }

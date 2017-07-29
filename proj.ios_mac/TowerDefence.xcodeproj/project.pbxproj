@@ -67,6 +67,10 @@
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
+		D60FC9731F2C8D2E00B3D956 /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D60FC9721F2C8D2E00B3D956 /* Bullet.cpp */; };
+		D60FC9741F2C8D2E00B3D956 /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D60FC9721F2C8D2E00B3D956 /* Bullet.cpp */; };
+		D60FC9761F2C906700B3D956 /* bullet.png in Resources */ = {isa = PBXBuildFile; fileRef = D60FC9751F2C906700B3D956 /* bullet.png */; };
+		D60FC9771F2C906700B3D956 /* bullet.png in Resources */ = {isa = PBXBuildFile; fileRef = D60FC9751F2C906700B3D956 /* bullet.png */; };
 		D63F97C31F2A198300C6FB23 /* stone_1.png in Resources */ = {isa = PBXBuildFile; fileRef = D63F97C01F2A198300C6FB23 /* stone_1.png */; };
 		D63F97C41F2A198300C6FB23 /* stone_2.png in Resources */ = {isa = PBXBuildFile; fileRef = D63F97C11F2A198300C6FB23 /* stone_2.png */; };
 		D63F97C51F2A198300C6FB23 /* stone_3.png in Resources */ = {isa = PBXBuildFile; fileRef = D63F97C21F2A198300C6FB23 /* stone_3.png */; };
@@ -184,6 +188,9 @@
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		D60FC9701F2C8D1700B3D956 /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
+		D60FC9721F2C8D2E00B3D956 /* Bullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bullet.cpp; sourceTree = "<group>"; };
+		D60FC9751F2C906700B3D956 /* bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bullet.png; sourceTree = "<group>"; };
 		D63F97C01F2A198300C6FB23 /* stone_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stone_1.png; sourceTree = "<group>"; };
 		D63F97C11F2A198300C6FB23 /* stone_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stone_2.png; sourceTree = "<group>"; };
 		D63F97C21F2A198300C6FB23 /* stone_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stone_3.png; sourceTree = "<group>"; };
@@ -346,6 +353,7 @@
 				D646CBF61F2B491F0033F670 /* road.png */,
 				D646CBF81F2B491F0033F670 /* weapon.png */,
 				D646CBFE1F2B5CDD0033F670 /* selectedEdit.png */,
+				D60FC9751F2C906700B3D956 /* bullet.png */,
 			);
 			name = Resources;
 			path = ../Resources;
@@ -360,6 +368,8 @@
 				46880B8719C43A87006E1F66 /* MainScene.h */,
 				D646CBEA1F2B26610033F670 /* Weapon.cpp */,
 				D646CBED1F2B26740033F670 /* Weapon.h */,
+				D60FC9721F2C8D2E00B3D956 /* Bullet.cpp */,
+				D60FC9701F2C8D1700B3D956 /* Bullet.h */,
 				D6ABD1FB1F2A2489006ECA9C /* Tank.cpp */,
 				D6ABD1F71F2A2460006ECA9C /* Tank.h */,
 				D6B305E91F2896750051AD20 /* GameField.cpp */,
@@ -523,6 +533,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
+				D60FC9761F2C906700B3D956 /* bullet.png in Resources */,
 				D6E538231F287DE700645DF8 /* background.png in Resources */,
 				D6E538291F287DE700645DF8 /* tower_weapon.png in Resources */,
 				D646CBFF1F2B5CDD0033F670 /* selectedEdit.png in Resources */,
@@ -563,6 +574,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				46880B8219C43A67006E1F66 /* HelloWorld.png in Resources */,
+				D60FC9771F2C906700B3D956 /* bullet.png in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
 				3EACC99019EE6D4300EB3C5E /* res in Resources */,
 				521A8EAA19F11F5000D177D7 /* fonts in Resources */,
@@ -585,6 +597,7 @@
 				46880B8A19C43A87006E1F66 /* MainScene.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
+				D60FC9731F2C8D2E00B3D956 /* Bullet.cpp in Sources */,
 				D646CBEB1F2B26610033F670 /* Weapon.cpp in Sources */,
 				D642C81A1F293BEE00640FB8 /* Grid.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
@@ -598,6 +611,7 @@
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				46880B8B19C43A87006E1F66 /* MainScene.cpp in Sources */,
+				D60FC9741F2C8D2E00B3D956 /* Bullet.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

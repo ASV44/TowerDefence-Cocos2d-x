@@ -48,7 +48,7 @@ Grid::Grid(Point startPoint, Point endPoint)
             this->addChild(cells[i][j]);
         }
     }
-    this->setGlobalZOrder(100);
+    //this->setGlobalZOrder(100);
     editMode = FieldCell::EDIT_ROAD;
     editToolsAMount = 2;
     editTools = new Sprite*[editToolsAMount];
@@ -58,14 +58,14 @@ Grid::Grid(Point startPoint, Point endPoint)
                                       origin.y - 0.0258 * visibleSize.height));
         editTools[i]->setContentSize(Size(0.066 * visibleSize.width,
                                           0.1171 * visibleSize.height));
-        editTools[i]->setGlobalZOrder(100);
+        //editTools[i]->setGlobalZOrder(100);
         this->addChild(editTools[i]);
     }
     selectedEdit = Sprite::create("selectedEdit.png");
     selectedEdit->setContentSize(Size(0.066 * visibleSize.width,
                                       0.1171 * visibleSize.height));
     selectedEdit->setPosition(editTools[editMode]->getPosition());
-    selectedEdit->setGlobalZOrder(99);
+    //selectedEdit->setGlobalZOrder(99);
     this->addChild(selectedEdit);
     
     

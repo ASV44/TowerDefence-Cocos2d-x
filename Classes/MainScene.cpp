@@ -38,21 +38,30 @@ bool MainScene::init()
             {
                 auto weapon = new Weapon(gameField->getGrid(), Point(i,j));
                 weapons.push_back(weapon);
-                this->addChild(weapon);
                 this->addChild(weapon->getBase());
+                this->addChild(weapon);
             }
         }
     }
     
+    this->gameField->addFieldStones();
+    
     this->scheduleUpdate();
-    CCLOG("Scene globa Z %f",this->getGlobalZOrder());
+    
+    
+    
+    
+   // CCLOG("Scene globa Z %f",this->getGlobalZOrder());
     return true;
 }
 
 void MainScene::update(float delta) {
-    tank->move();
-    for(int i = 0; i < weapons.size(); i++)
-    {
-        weapons[i]->rotate();
+    if(!gameField->isOnDebug()) {
+        tank->move();
+        for(int i = 0; i < weapons.size(); i++)
+        {
+            weapons[i]->update(delta);
+        }
     }
+    log("");
 }

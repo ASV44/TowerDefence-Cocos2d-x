@@ -23,10 +23,11 @@ Tank::Tank(Grid *grid)
     this->target = Point(4,1);
     this->setPosition(Point(origin.x,
                             origin.y + grid->getCell(gridPosition)->getCenterLocation().y));
+    grid->getCell(gridPosition)->setTankState(true);
     this->health = 100;
     this->angle = 0;
     this->finish = Point(4,22);
-    this->setGlobalZOrder(25);
+    this->setGlobalZOrder(24);
     
     //CCLOG("Target x:%f y:%f",grid->getCell(target)->getCenterLocation().x,grid->getCell(target)->getCenterLocation().y);
 };
@@ -45,6 +46,8 @@ void Tank::move()
             auto previousPosition = gridPosition;
             gridPosition = target;
             target = getTarget(previousPosition);
+            grid->getCell(previousPosition)->setTankState(false);
+            grid->getCell(gridPosition)->setTankState(true);
         }
     }
     
@@ -116,7 +119,7 @@ Point Tank::getTarget(Point previousPosition)
     }
     srand(time( 0 ));
     newTarget = newTargets[rand() % newTargets.size()];
-    CCLOG("Target x:%f y:%f", newTarget.x, newTarget.y);
+    //CCLOG("Target x:%f y:%f", newTarget.x, newTarget.y);
     return newTarget;
 }
 

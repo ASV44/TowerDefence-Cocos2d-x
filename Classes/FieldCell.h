@@ -9,7 +9,7 @@
 #ifndef FieldCell_h
 #define FieldCell_h
 
-#include <time.h>
+#include "cocos2d.h"
 
 USING_NS_CC;
 
@@ -23,6 +23,7 @@ public:
     CC_SYNTHESIZE(Size, cellSize, CellSize);
     CC_SYNTHESIZE(Point, centerLocation, CenterLocation);
     CC_SYNTHESIZE(int, editMode, EditMode);
+    CC_SYNTHESIZE(bool, tankState, TankState);
     void changeState();
     bool inCell(Point touchPoint);
     void putWeapon();
@@ -33,7 +34,6 @@ public:
 private:
     int state;
     EventListenerTouchOneByOne *listener;
-    float time;
 };
 
 #endif /* FieldCell_h */
