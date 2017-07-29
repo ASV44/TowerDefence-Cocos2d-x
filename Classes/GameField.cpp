@@ -34,7 +34,7 @@ GameField::GameField()
     CCLOG("GameField globa Z %f",this->getGlobalZOrder());
     //grid->setGlobalZOrder();
     CCLOG("Grid globa Z %f",grid->getGlobalZOrder());
-    this->addChild(grid,3);
+    //this->addChild(grid,3);
     CCLOG("Grid globa Z %f",grid->getGlobalZOrder());
     
     stonesAmount = 3;

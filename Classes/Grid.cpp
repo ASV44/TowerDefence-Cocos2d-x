@@ -16,6 +16,7 @@ Grid::Grid(Point startPoint, Point endPoint)
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     
     this->create();
+    this->setPosition(origin);
     this->setContentSize(Size(endPoint.x - startPoint.x,
                               endPoint.y - startPoint.y));
     
@@ -66,7 +67,7 @@ Grid::Grid(Point startPoint, Point endPoint)
                                       0.1171 * visibleSize.height));
     selectedEdit->setPosition(editTools[editMode]->getPosition());
     //selectedEdit->setGlobalZOrder(99);
-    this->addChild(selectedEdit);
+    this->addChild(selectedEdit,-1);
     
     
     listener = EventListenerTouchOneByOne::create();

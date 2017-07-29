@@ -24,6 +24,9 @@ public:
     float distanceTo(Point target);
     void update(float delta);
     void fire(Point target);
+    Vec2 origin;
+    float time;
+    float getAngle(Point target, float distance);
     
 private:
     Grid *grid;
@@ -32,6 +35,7 @@ private:
     float angle;
     float activeRadius;
     vector<Bullet*> bullets;
+    float delay;
 };
 
 #endif /* Weapon_h */

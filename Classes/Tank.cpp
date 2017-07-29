@@ -27,7 +27,7 @@ Tank::Tank(Grid *grid)
     this->health = 100;
     this->angle = 0;
     this->finish = Point(4,22);
-    this->setGlobalZOrder(24);
+    //this->setGlobalZOrder(24);
     
     //CCLOG("Target x:%f y:%f",grid->getCell(target)->getCenterLocation().x,grid->getCell(target)->getCenterLocation().y);
 };

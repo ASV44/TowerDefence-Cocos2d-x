@@ -46,6 +46,8 @@ bool MainScene::init()
     
     this->gameField->addFieldStones();
     
+    this->addChild(gameField->getGrid());
+    
     this->scheduleUpdate();
     
     

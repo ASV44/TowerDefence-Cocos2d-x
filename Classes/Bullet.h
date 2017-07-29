@@ -14,11 +14,13 @@ USING_NS_CC;
 class Bullet : public Sprite
 {
 public:
-    Bullet(Point startPoint, Vec2 path);
+    Bullet(Point startPoint, Vec2 path, float angle);
     void update();
+    Vec2 getPath();
     
 private:
     Vec2 path;
+    float angle;
 };
 
 #endif /* Bullet_h */
