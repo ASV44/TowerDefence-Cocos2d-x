@@ -17,8 +17,9 @@ Tank::Tank(Grid *grid)
     origin = Director::getInstance()->getVisibleOrigin();
     
     this->initWithFile("tank.png");
-    this->setContentSize(Size(0.03785 * visibleSize.width,
-                              0.06406 * visibleSize.height));
+    auto tankSize = Size(0.03785 * visibleSize.width,
+                         0.06406 * visibleSize.height);
+    this->setContentSize(tankSize);
     this->gridPosition = Point(4,0);
     this->target = Point(4,1);
     this->setPosition(Point(origin.x,
@@ -27,6 +28,7 @@ Tank::Tank(Grid *grid)
     this->health = 100;
     this->angle = 0;
     this->finish = Point(4,22);
+    this->activeRadius = 0.75 * tankSize.width;
     //this->setGlobalZOrder(24);
     
     //CCLOG("Target x:%f y:%f",grid->getCell(target)->getCenterLocation().x,grid->getCell(target)->getCenterLocation().y);
@@ -147,12 +149,32 @@ FieldCell* Tank::getNeighbour(int neighbourCase)
     }
 }
 
+float Tank::getActiveRadius()
+{
+    return this->activeRadius;
+}
 
+void Tank::reset()
+{
+    grid->getCell(gridPosition)->setTankState(false);
+    this->gridPosition = Point(4,0);
+    this->target = Point(4,1);
+    this->setPosition(Point(origin.x,
+                            origin.y + grid->getCell(gridPosition)->getCenterLocation().y));
+    grid->getCell(gridPosition)->setTankState(true);
+    this->health = 100;
+    this->angle = 0;
+}
 
+void Tank::setDamage(float damage)
+{
+    this->health -= damage;
+}
 
-
-
-
+float Tank::getHealth()
+{
+    return this->health;
+}
 
 
 

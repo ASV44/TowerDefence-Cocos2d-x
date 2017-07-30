@@ -16,13 +16,15 @@ USING_NS_CC;
 class Bullet : public Sprite
 {
 public:
-    Bullet(Point startPoint, Vec2 path, float angle);
+    Bullet(Point startPoint, Vec2 path, float delta_x);
     void update();
     Vec2 getPath();
+    bool isOnScreen();
+    CC_SYNTHESIZE(float, damage, Damage);
 
 private:
     Vec2 path;
-    float angle;
+    float delta_x;
 };
 
 #endif /* Bullet_h */

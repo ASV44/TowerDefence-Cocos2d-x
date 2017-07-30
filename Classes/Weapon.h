@@ -27,6 +27,8 @@ public:
     Vec2 origin;
     float time;
     float getAngle(Point target, float distance);
+    vector<Bullet*> getBullets();
+    void dropBullets(vector<int> deleteBullets);
     
 private:
     Grid *grid;

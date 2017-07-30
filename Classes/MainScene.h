@@ -12,12 +12,14 @@ public:
     static cocos2d::Scene* createScene();
     void update(float delta);
     virtual bool init();
+    void checkColision(vector<Bullet*> bullets);
     
     // implement the "static create()" method manually
     CREATE_FUNC(MainScene);
 private:
     GameField *gameField;
-    Tank *tank;
+    vector<Tank*> tanks;
+    int tanksAmount;
     vector<Weapon*> weapons;
 };
 

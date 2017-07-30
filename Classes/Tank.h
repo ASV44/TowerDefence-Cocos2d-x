@@ -23,17 +23,22 @@ public:
     void move();
     void moveTo(Point target);
     Point getTarget(Point previousPosition);
+    float getActiveRadius();
+    void reset();
+    void setDamage(float damage);
+    float getHealth();
     
 private:
     Grid *grid;
     Point gridPosition;
-    int health;
+    float health;
     float speed;
     float angle;
     Point target;
     Point finish;
     FieldCell *getNeighbour(int neighbourCase);
     Vec2 origin;
+    float activeRadius;
 };
 
 #endif /* Tank_h */

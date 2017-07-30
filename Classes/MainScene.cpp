@@ -24,8 +24,11 @@ bool MainScene::init()
     gameField = new GameField();
     this->addChild(gameField);
     
-    tank = new Tank(gameField->getGrid());
-    this->addChild(tank);
+    tanksAmount = 1;
+    for(int i = 0; i < tanksAmount; ++i) {
+        tanks.push_back(new Tank(gameField->getGrid()));
+        this->addChild(tanks[i]);
+    }
     
     auto gridSize = gameField->getGrid()->getGridSize();
     auto width = int(gridSize.width);
@@ -59,11 +62,61 @@ bool MainScene::init()
 
 void MainScene::update(float delta) {
     if(!gameField->isOnDebug()) {
-        tank->move();
         for(int i = 0; i < weapons.size(); i++)
         {
+            checkColision(weapons[i]->getBullets());
             weapons[i]->update(delta);
+        }
+        for(int i = 0; i < tanks.size(); i++) {
+            tanks[i]->move();
         }
     }
     log("");
 }
+
+void MainScene::checkColision(vector<Bullet*> bullets)
+{
+    for(int i = 0; i < bullets.size(); i++) {
+        auto bulletPosition = bullets[i]->getPosition();
+        for(int j = 0; j < tanks.size(); j++) {
+            auto tankPosition = tanks[j]->getPosition();
+            auto tankActiveRadius = tanks[j]->getActiveRadius();
+            if(bulletPosition.x >= tankPosition.x - tankActiveRadius &&
+               bulletPosition.x <= tankPosition.x + tankActiveRadius &&
+               bulletPosition.y >= tankPosition.y - tankActiveRadius &&
+               bulletPosition.y <= tankPosition.y + tankActiveRadius) {
+                tanks[j]->setDamage(bullets[i]->getDamage());
+                bullets[i]->setVisible(false);
+                if(tanks[j]->getHealth() <= 0) {
+                    tanks[j]->reset();
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

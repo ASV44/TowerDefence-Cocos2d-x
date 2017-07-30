@@ -21,7 +21,6 @@ Weapon::Weapon(Grid *grid, Point gridPosition)
                               0.0765 * visibleSize.height));
     this->gridPosition = gridPosition;
     //this->setGlobalZOrder(25);
-    
     this->angle = 0;
     
     this->base = Sprite::create("tower_base.png");
@@ -44,7 +43,8 @@ Sprite* Weapon::getBase()
 
 void Weapon::rotate()
 {
-    this->setRotation(this->getRotation() + 1);
+    angle += 1;
+    this->setRotation(angle);
 }
 
 Point Weapon::findTarget()
@@ -88,6 +88,8 @@ float Weapon::distanceTo(Point target)
 
 void Weapon::update(float delta)
 {
+    vector<int> deleteBullets;
+    
     auto target = findTarget();
     //CCLOG("Weapon row:%f column:%f Target row:%f column:%f",gridPosition.x,gridPosition.y,target.x,target.y);
     if(time != 0) {
@@ -101,7 +103,16 @@ void Weapon::update(float delta)
         rotate();
     }
     for(int i = 0; i < bullets.size(); i++) {
-        bullets[i]->update();
+        if(bullets[i]->isVisible() && bullets[i]->isOnScreen()) {
+            bullets[i]->update();
+        }
+        else {
+            deleteBullets.push_back(i);
+        }
+    }
+    
+    if(deleteBullets.size() > 0) {
+        dropBullets(deleteBullets);
     }
 //    if(bullets.size() >= 1) {
 //    CCLOG("Weapon x:%f y:%f Bullet 0 x:%f y:%f",this->getPosition().x,this->getPosition().y,
@@ -115,11 +126,12 @@ void Weapon::fire(Point target)
     auto path = Vec2();
     auto selfPosition = this->getPosition();
     target = target + origin;
+    auto delta_x = target.x - selfPosition.x;
     
     path.x = (target.y - selfPosition.y) / (target.x - selfPosition.x);
     path.y = (target.x * selfPosition.y - selfPosition.x * target.y) / (target.x - selfPosition.x);
     
-    auto bullet = new Bullet(selfPosition, path, angle);
+    auto bullet = new Bullet(selfPosition, path, delta_x);
     bullets.push_back(bullet);
     this->getParent()->addChild(bullet);
 }
@@ -129,15 +141,52 @@ float Weapon::getAngle(Point target, float distance)
     float angle;
     auto selfPosition = this->getPosition();
     target = target + origin;
-    float cosine = abs(target.y - selfPosition.y) / distance;
+    auto delta_y = target.y - selfPosition.y;
+    float cosine = abs(delta_y) / distance;
     angle = acos(cosine) * 180 / M_PI;
     auto delta_x = target.x - selfPosition.x;
     if(delta_x < 0) {
         angle = -angle;
     }
+    if(delta_y < 0) {
+        angle = -180 - angle;
+    }
     
     return angle;
 }
+
+vector<Bullet*> Weapon::getBullets()
+{
+    return bullets;
+}
+
+
+void Weapon::dropBullets(vector<int> deleteBullets) {
+    for(int i = 0; i < deleteBullets.size(); ++i) {
+        auto bullet = bullets[deleteBullets[i]];
+        bullets.erase(bullets.begin() + deleteBullets[i]);
+        bullet->release();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
