@@ -11,14 +11,25 @@ LOCAL_MODULE := MyGame_shared
 
 LOCAL_MODULE_FILENAME := libMyGame
 
-LOCAL_SRC_FILES := hellocpp/main.cpp \
-                   ../../../Classes/AppDelegate.cpp \
-                   ../../../Classes/MainScene.cpp \
-									 ../../../Classes/FieldCell.cpp \
-									 ../../../Classes/GameField.cpp \
-									 ../../../Classes/Grid.cpp \
-									 ../../../Classes/Tank.cpp \
-									 ../../../Classes/Weapon.cpp \
+
+HELLOCPP_FILES  := $(wildcard $(LOCAL_PATH)/hellocpp/*.cpp)
+HELLOCPP_FILES  := $(HELLOCPP_FILES:$(LOCAL_PATH)/%=%)
+
+CLASSES_FILES   := $(wildcard $(LOCAL_PATH)/../../../Classes/*.cpp)
+CLASSES_FILES   := $(CLASSES_FILES:$(LOCAL_PATH)/%=%)
+
+LOCAL_SRC_FILES := $(HELLOCPP_FILES)
+LOCAL_SRC_FILES += $(CLASSES_FILES)
+
+# LOCAL_SRC_FILES := hellocpp/main.cpp \
+#                    ../../../Classes/AppDelegate.cpp \
+#                    ../../../Classes/MainScene.cpp \
+# 									 ../../../Classes/FieldCell.cpp \
+# 									 ../../../Classes/GameField.cpp \
+# 									 ../../../Classes/Grid.cpp \
+# 									 ../../../Classes/Tank.cpp \
+# 									 ../../../Classes/Weapon.cpp \
+# 									 ../../../Classes/Bullet.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../Classes
 
