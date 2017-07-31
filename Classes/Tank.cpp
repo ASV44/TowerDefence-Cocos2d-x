@@ -17,7 +17,7 @@ Tank::Tank(Grid *grid)
     origin = Director::getInstance()->getVisibleOrigin();
     
     this->initWithFile("tank.png");
-    auto tankSize = Size(0.03785 * visibleSize.width,
+    this->tankSize = Size(0.03785 * visibleSize.width,
                          0.06406 * visibleSize.height);
     this->setContentSize(tankSize);
     this->gridPosition = Point(4,0);
@@ -29,8 +29,10 @@ Tank::Tank(Grid *grid)
     this->angle = 0;
     this->finish = Point(4,22);
     this->activeRadius = 0.75 * tankSize.width;
-    this->cellDelay = 2;
     this->setVisible(false);
+    this->drawHealth = DrawNode::create();
+    showHealth();
+    this->addChild(drawHealth,100);
     //this->setGlobalZOrder(24);
     
     //CCLOG("Target x:%f y:%f",grid->getCell(target)->getCenterLocation().x,grid->getCell(target)->getCenterLocation().y);
@@ -82,15 +84,15 @@ void Tank::moveTo(Point target)
             }
             break;
         case -1:
-            if(angle != 90) {
-                angle = 90;
+            if(angle != -90) {
+                angle = -90;
                 this->setRotation(angle);
             }
             this->setPositionY(getPositionY() + 1);
             break;
         case 1:
-            if(angle != -90) {
-                angle = -90;
+            if(angle != 90) {
+                angle = 90;
                 this->setRotation(angle);
             }
             this->setPositionY(getPositionY() - 1);
@@ -171,11 +173,13 @@ void Tank::reset()
     this->angle = 0;
     this->setRotation(angle);
     this->setVisible(false);
+    this->showHealth();
 }
 
 void Tank::setDamage(float damage)
 {
     this->health -= damage;
+    showHealth();
 }
 
 float Tank::getHealth()
@@ -202,6 +206,38 @@ bool Tank::canMove()
     
     return canMove;
 }
+
+void Tank::showHealth()
+{
+    auto startPoint = Point(0, tankSize.height);
+    drawHealth->clear();
+    auto healthLine = Vec2(tankSize.width * health / 100, 5);
+    drawHealth->drawSolidRect(startPoint,
+                              startPoint + healthLine,
+                              Color4F(0,0,1,1));
+    startPoint = Point(healthLine.x, tankSize.height);
+    healthLine.x = tankSize.width - healthLine.x;
+    drawHealth->drawSolidRect(startPoint,
+                              startPoint + healthLine,
+                              Color4F(1,0,0,1));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

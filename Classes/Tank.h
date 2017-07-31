@@ -28,6 +28,8 @@ public:
     void setDamage(float damage);
     float getHealth();
     bool canMove();
+    void showHealth();
+    Size tankSize;
     
 private:
     Grid *grid;
@@ -40,7 +42,7 @@ private:
     FieldCell *getNeighbour(int neighbourCase);
     Vec2 origin;
     float activeRadius;
-    int cellDelay;
+    DrawNode *drawHealth;
 };
 
 #endif /* Tank_h */
