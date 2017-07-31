@@ -27,6 +27,7 @@ public:
     void reset();
     void setDamage(float damage);
     float getHealth();
+    bool canMove();
     
 private:
     Grid *grid;
@@ -39,6 +40,7 @@ private:
     FieldCell *getNeighbour(int neighbourCase);
     Vec2 origin;
     float activeRadius;
+    int cellDelay;
 };
 
 #endif /* Tank_h */

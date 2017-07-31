@@ -24,11 +24,13 @@ Tank::Tank(Grid *grid)
     this->target = Point(4,1);
     this->setPosition(Point(origin.x,
                             origin.y + grid->getCell(gridPosition)->getCenterLocation().y));
-    grid->getCell(gridPosition)->setTankState(true);
+    //grid->getCell(gridPosition)->setTankState(true);
     this->health = 100;
     this->angle = 0;
     this->finish = Point(4,22);
     this->activeRadius = 0.75 * tankSize.width;
+    this->cellDelay = 2;
+    this->setVisible(false);
     //this->setGlobalZOrder(24);
     
     //CCLOG("Target x:%f y:%f",grid->getCell(target)->getCenterLocation().x,grid->getCell(target)->getCenterLocation().y);
@@ -50,6 +52,9 @@ void Tank::move()
             target = getTarget(previousPosition);
             grid->getCell(previousPosition)->setTankState(false);
             grid->getCell(gridPosition)->setTankState(true);
+        }
+        else {
+            this->reset();
         }
     }
     
@@ -161,9 +166,11 @@ void Tank::reset()
     this->target = Point(4,1);
     this->setPosition(Point(origin.x,
                             origin.y + grid->getCell(gridPosition)->getCenterLocation().y));
-    grid->getCell(gridPosition)->setTankState(true);
+    //grid->getCell(gridPosition)->setTankState(true);
     this->health = 100;
     this->angle = 0;
+    this->setRotation(angle);
+    this->setVisible(false);
 }
 
 void Tank::setDamage(float damage)
@@ -176,7 +183,25 @@ float Tank::getHealth()
     return this->health;
 }
 
-
+bool Tank::canMove()
+{
+    bool canMove = true;
+    
+    if((!this->isVisible() &&
+       grid->getCell(gridPosition)->getTankState()) ||
+       grid->getCell(target)->getTankState())
+    {
+        canMove = false;
+        
+    }
+    
+    if(canMove && !this->isVisible()) {
+        this->setVisible(true);
+        grid->getCell(gridPosition)->setTankState(true);
+    }
+    
+    return canMove;
+}
 
 
 

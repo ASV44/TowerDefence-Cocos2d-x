@@ -163,8 +163,8 @@ vector<Bullet*> Weapon::getBullets()
 
 void Weapon::dropBullets(vector<int> deleteBullets) {
     for(int i = 0; i < deleteBullets.size(); ++i) {
-        auto bullet = bullets[deleteBullets[i]];
-        bullets.erase(bullets.begin() + deleteBullets[i]);
+        auto bullet = bullets[deleteBullets[i] - i];
+        bullets.erase(bullets.begin() + deleteBullets[i] - i);
         bullet->release();
     }
 }
