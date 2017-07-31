@@ -17,20 +17,24 @@ Weapon::Weapon(Grid *grid, Point gridPosition)
     this->initWithFile("tower_weapon.png");
     auto location = grid->getCell(gridPosition)->getCenterLocation() + origin;
     this->setPosition(location);
-    this->setContentSize(Size(0.022 * visibleSize.width,
-                              0.0765 * visibleSize.height));
+    this->setContentSize(Size(0.0167 * visibleSize.width,
+                              0.07812 * visibleSize.height));
     this->gridPosition = gridPosition;
     //this->setGlobalZOrder(25);
     this->angle = 0;
     
     this->base = Sprite::create("tower_base.png");
-    this->base->setPosition(this->getPosition());
     this->base->setContentSize(Size(0.0299 * visibleSize.width,
                                     0.0531 * visibleSize.height));
     
-    this->activeRadius = grid->getCellSize().width * 3;
+    this->base->setPosition(this->getPosition());// - Vec2(0.4 * base->getContentSize().width,
+                                                   //    0.3673 * base->getContentSize().height));
+//    this->base->setAnchorPoint(Point(0,0));
+    this->activeRadius = grid->getCellSize().width * 2.5;
     this->time = 0;
     this->delay = 1;
+    designer = DrawNode::create();
+    designer->drawDot(this->getPosition(), activeRadius, Color4F(0,0,1,0.3f));
 //    CCLOG("Weapon Position x:%f y:%f", this->getPosition().x, this->getPosition().y);
 //    CCLOG("Base Position x:%f y:%f", base->getPosition().x, base->getPosition().y);
 //    CCLOG("Base Anchor x:%f y:%f", base->getAnchorPoint().x, base->getAnchorPoint().y);
@@ -169,7 +173,10 @@ void Weapon::dropBullets(vector<int> deleteBullets) {
     }
 }
 
-
+DrawNode* Weapon::getDesigner()
+{
+    return this->designer;
+}
 
 
 

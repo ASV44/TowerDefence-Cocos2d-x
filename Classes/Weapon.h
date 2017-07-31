@@ -29,6 +29,7 @@ public:
     float getAngle(Point target, float distance);
     vector<Bullet*> getBullets();
     void dropBullets(vector<int> deleteBullets);
+    DrawNode* getDesigner();
     
 private:
     Grid *grid;
@@ -38,6 +39,7 @@ private:
     float activeRadius;
     vector<Bullet*> bullets;
     float delay;
+    DrawNode *designer;
 };
 
 #endif /* Weapon_h */

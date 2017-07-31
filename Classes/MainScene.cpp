@@ -41,6 +41,7 @@ bool MainScene::init()
             {
                 auto weapon = new Weapon(gameField->getGrid(), Point(i,j));
                 weapons.push_back(weapon);
+                this->addChild(weapon->getDesigner());
                 this->addChild(weapon->getBase());
                 this->addChild(weapon);
             }
