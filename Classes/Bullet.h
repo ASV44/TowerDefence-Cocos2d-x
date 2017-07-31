@@ -25,6 +25,7 @@ public:
 private:
     Vec2 path;
     float delta_x;
+    float speed;
 };
 
 #endif /* Bullet_h */

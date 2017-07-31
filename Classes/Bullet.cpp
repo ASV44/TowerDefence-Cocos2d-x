@@ -21,6 +21,7 @@ Bullet::Bullet(Point startPoint, Vec2 path, float delta_x)
     this->path = path;
     this->delta_x = delta_x;
     this->damage = 34;
+    this->speed = 2.5;
 }
 
 void Bullet::update()
@@ -28,10 +29,10 @@ void Bullet::update()
     auto currentPosition = this->getPosition();
     
     if(delta_x < 0) {
-        currentPosition.x -= 1;
+        currentPosition.x -= speed;
     }
     else {
-        currentPosition.x += 1;
+        currentPosition.x += speed;
     }
     currentPosition.y = path.x * currentPosition.x + path.y;
     

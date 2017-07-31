@@ -32,7 +32,7 @@ Weapon::Weapon(Grid *grid, Point gridPosition)
 //    this->base->setAnchorPoint(Point(0,0));
     this->activeRadius = grid->getCellSize().width * 2.5;
     this->time = 0;
-    this->delay = 1;
+    this->delay = 0.5;
     designer = DrawNode::create();
     designer->drawDot(this->getPosition(), activeRadius, Color4F(0,0,1,0.3f));
 //    CCLOG("Weapon Position x:%f y:%f", this->getPosition().x, this->getPosition().y);

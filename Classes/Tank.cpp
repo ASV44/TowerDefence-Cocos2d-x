@@ -72,6 +72,8 @@ void Tank::moveTo(Point target)
                 if(angle != 0) {
                     angle = 0;
                     this->setRotation(angle);
+                    drawHealth->setRotation(-angle);
+                    showHealth();
                 }
                 this->setPositionX(getPositionX() + 1);
             }
@@ -79,6 +81,8 @@ void Tank::moveTo(Point target)
                 if(angle != 180) {
                     angle = 180;
                     this->setRotation(angle);
+                    drawHealth->setRotation(-angle);
+                    showHealth();
                 }
                 this->setPositionX(getPositionX() - 1);
             }
@@ -87,6 +91,8 @@ void Tank::moveTo(Point target)
             if(angle != -90) {
                 angle = -90;
                 this->setRotation(angle);
+                drawHealth->setRotation(-angle);
+                showHealth();
             }
             this->setPositionY(getPositionY() + 1);
             break;
@@ -94,6 +100,8 @@ void Tank::moveTo(Point target)
             if(angle != 90) {
                 angle = 90;
                 this->setRotation(angle);
+                drawHealth->setRotation(-angle);
+                showHealth();
             }
             this->setPositionY(getPositionY() - 1);
             break;
@@ -209,16 +217,33 @@ bool Tank::canMove()
 
 void Tank::showHealth()
 {
-    auto startPoint = Point(0, tankSize.height);
-    drawHealth->clear();
+    Point startHealth, startDamage;
     auto healthLine = Vec2(tankSize.width * health / 100, 5);
-    drawHealth->drawSolidRect(startPoint,
-                              startPoint + healthLine,
+    auto damageLine = Vec2(tankSize.width - healthLine.x, 5);
+    switch (int(angle)) {
+        case 0:
+            startHealth = Point(0, tankSize.height * 1.25);
+            startDamage = Point(healthLine.x, tankSize.height * 1.25);
+            break;
+        case -90:
+            startHealth = Point(-tankSize.height, tankSize.width * 1.25);
+            startDamage = Point(-tankSize.height + healthLine.x, tankSize.width * 1.25);
+            break;
+        case 90:
+            startHealth = Point(0, tankSize.width * 0.25);
+            startDamage = Point( healthLine.x, tankSize.width * 0.25);
+            break;
+        default:
+            break;
+    }
+    
+    drawHealth->clear();
+    
+    drawHealth->drawSolidRect(startHealth,
+                              startHealth + healthLine,
                               Color4F(0,0,1,1));
-    startPoint = Point(healthLine.x, tankSize.height);
-    healthLine.x = tankSize.width - healthLine.x;
-    drawHealth->drawSolidRect(startPoint,
-                              startPoint + healthLine,
+    drawHealth->drawSolidRect(startDamage,
+                              startDamage + damageLine,
                               Color4F(1,0,0,1));
 }
 
