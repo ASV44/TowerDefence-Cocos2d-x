@@ -27,6 +27,7 @@ Tank::Tank(Grid *grid)
     //grid->getCell(gridPosition)->setTankState(true);
     this->health = 100;
     this->angle = 0;
+    this->speed = 1;
     this->finish = Point(4,22);
     this->activeRadius = 0.75 * tankSize.width;
     this->setVisible(false);
@@ -75,7 +76,7 @@ void Tank::moveTo(Point target)
                     drawHealth->setRotation(-angle);
                     showHealth();
                 }
-                this->setPositionX(getPositionX() + 1);
+                this->setPositionX(getPositionX() + speed);
             }
             else if(deltaPosition.y == 1) {
                 if(angle != 180) {
@@ -84,7 +85,7 @@ void Tank::moveTo(Point target)
                     drawHealth->setRotation(-angle);
                     showHealth();
                 }
-                this->setPositionX(getPositionX() - 1);
+                this->setPositionX(getPositionX() - speed);
             }
             break;
         case -1:
@@ -94,7 +95,7 @@ void Tank::moveTo(Point target)
                 drawHealth->setRotation(-angle);
                 showHealth();
             }
-            this->setPositionY(getPositionY() + 1);
+            this->setPositionY(getPositionY() + speed);
             break;
         case 1:
             if(angle != 90) {
@@ -103,7 +104,7 @@ void Tank::moveTo(Point target)
                 drawHealth->setRotation(-angle);
                 showHealth();
             }
-            this->setPositionY(getPositionY() - 1);
+            this->setPositionY(getPositionY() - speed);
             break;
         default:
             break;
@@ -246,7 +247,6 @@ void Tank::showHealth()
                               startDamage + damageLine,
                               Color4F(1,0,0,1));
 }
-
 
 
 

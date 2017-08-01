@@ -54,7 +54,9 @@ bool MainScene::init()
     
     this->scheduleUpdate();
     
-    
+    explosion = new Explosion("explosion.png", Size(5,5));
+    this->addChild(explosion);
+    //explosion->check();
     
     
    // CCLOG("Scene globa Z %f",this->getGlobalZOrder());
@@ -92,6 +94,7 @@ void MainScene::checkColision(vector<Bullet*> bullets)
                 tanks[j]->setDamage(bullets[i]->getDamage());
                 bullets[i]->setVisible(false);
                 if(tanks[j]->getHealth() <= 0) {
+                    explosion->expload(tanks[j]->getPosition());
                     tanks[j]->reset();
                 }
             }
