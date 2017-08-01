@@ -22,7 +22,6 @@ private:
     vector<Tank*> tanks;
     int tanksAmount;
     vector<Weapon*> weapons;
-    Explosion *explosion;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

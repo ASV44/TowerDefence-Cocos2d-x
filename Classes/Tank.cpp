@@ -27,13 +27,14 @@ Tank::Tank(Grid *grid)
     //grid->getCell(gridPosition)->setTankState(true);
     this->health = 100;
     this->angle = 0;
-    this->speed = 1;
+    this->speed = 2;
     this->finish = Point(4,22);
     this->activeRadius = 0.75 * tankSize.width;
     this->setVisible(false);
     this->drawHealth = DrawNode::create();
     showHealth();
     this->addChild(drawHealth,100);
+    explosion = new Explosion("explosion.png", Size(5,5), 0.05f);
     //this->setGlobalZOrder(24);
     
     //CCLOG("Target x:%f y:%f",grid->getCell(target)->getCenterLocation().x,grid->getCell(target)->getCenterLocation().y);
@@ -44,8 +45,10 @@ void Tank::move()
     auto position = this->getPosition() - origin;
     //CCLOG("Current Position x:%f y:%f", position.x, position.y);
     auto targetLocation = grid->getCell(this->target)->getCenterLocation();
-    if(round(position.x) != round(targetLocation.x) ||
-       round(position.y) != round(targetLocation.y)) {
+    auto deltaPosition = position - targetLocation;
+    //log("Delta x:%f y:%f", deltaPosition.x, deltaPosition.y);
+    if(abs(deltaPosition.x) >= speed ||
+       abs(deltaPosition.y) >= speed) {
         moveTo(this->target);
     }
     else {
@@ -181,7 +184,7 @@ void Tank::reset()
     this->health = 100;
     this->angle = 0;
     this->setRotation(angle);
-    this->setVisible(false);
+    //this->setVisible(false);
     this->showHealth();
 }
 
@@ -248,11 +251,15 @@ void Tank::showHealth()
                               Color4F(1,0,0,1));
 }
 
+void Tank::expload()
+{
+    this->explosion->expload(this->getPosition());
+}
 
-
-
-
-
+Explosion* Tank::getExplosion()
+{
+    return this->explosion;
+}
 
 
 

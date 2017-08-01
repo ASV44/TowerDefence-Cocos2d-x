@@ -18,7 +18,7 @@ USING_NS_CC;
 class Explosion : public Sprite {
     
 public:
-    Explosion(string fileName, Size frames);
+    Explosion(string fileName, Size frames, float speed);
     void expload(Point point);
     Vector<SpriteFrame*> createSpriteSheetAnimation(string fileName, Size frames);
     Animate* getExplosion();
@@ -28,6 +28,7 @@ private:
     Size frames;
     Animation *animation;
     Vector<SpriteFrame*> spriteFrames;
+    float speed;
 };
 
 #endif /* Explosion_h */

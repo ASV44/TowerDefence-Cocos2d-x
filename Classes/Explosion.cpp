@@ -8,7 +8,7 @@
 
 #include "Explosion.h"
 
-Explosion::Explosion(string fileName, Size frames)
+Explosion::Explosion(string fileName, Size frames, float speed)
 {
     this->init();
     auto visibleSize = Director::getInstance()->getVisibleSize();
@@ -21,6 +21,8 @@ Explosion::Explosion(string fileName, Size frames)
 
     this->setContentSize(Size(0.0563 * visibleSize.width,
                          0.1 * visibleSize.height));
+    
+    this->speed = speed;
     
 //    animation = Animation::createWithSpriteFrames(spriteFrames,0.2f);
 //    animation->retain();
@@ -53,7 +55,7 @@ Vector<SpriteFrame*> Explosion::createSpriteSheetAnimation(string fileName, Size
 void Explosion::expload(Point point)
 {
     this->setPosition(point);
-    this->runAction(Animate::create(Animation::createWithSpriteFrames(spriteFrames,0.05f)));
+    this->runAction(Animate::create(Animation::createWithSpriteFrames(spriteFrames, speed)));
 }
 
 //Animate* Explosion::getExplosion()

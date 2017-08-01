@@ -28,6 +28,7 @@ bool MainScene::init()
     for(int i = 0; i < tanksAmount; ++i) {
         tanks.push_back(new Tank(gameField->getGrid()));
         this->addChild(tanks[i]);
+        this->addChild(tanks[i]->getExplosion());
     }
     
     auto gridSize = gameField->getGrid()->getGridSize();
@@ -54,8 +55,7 @@ bool MainScene::init()
     
     this->scheduleUpdate();
     
-    explosion = new Explosion("explosion.png", Size(5,5));
-    this->addChild(explosion);
+
     //explosion->check();
     
     
@@ -94,7 +94,7 @@ void MainScene::checkColision(vector<Bullet*> bullets)
                 tanks[j]->setDamage(bullets[i]->getDamage());
                 bullets[i]->setVisible(false);
                 if(tanks[j]->getHealth() <= 0) {
-                    explosion->expload(tanks[j]->getPosition());
+                    tanks[j]->expload();
                     tanks[j]->reset();
                 }
             }

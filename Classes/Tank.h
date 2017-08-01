@@ -11,6 +11,7 @@
 
 #include "Grid.h"
 #include <ctime>
+#include "Explosion.h"
 
 using namespace std;
 
@@ -29,7 +30,8 @@ public:
     float getHealth();
     bool canMove();
     void showHealth();
-    Size tankSize;
+    void expload();
+    Explosion* getExplosion();
     
 private:
     Grid *grid;
@@ -39,10 +41,13 @@ private:
     float angle;
     Point target;
     Point finish;
+    Size tankSize;
     FieldCell *getNeighbour(int neighbourCase);
     Vec2 origin;
     float activeRadius;
     DrawNode *drawHealth;
+    Explosion *explosion;
+    
 };
 
 #endif /* Tank_h */
