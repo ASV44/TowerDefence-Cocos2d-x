@@ -27,14 +27,20 @@ Weapon::Weapon(Grid *grid, Point gridPosition)
     this->base->setContentSize(Size(0.0299 * visibleSize.width,
                                     0.0531 * visibleSize.height));
     
-    this->base->setPosition(this->getPosition());// - Vec2(0.4 * base->getContentSize().width,
+    this->base->setPosition(this->getContentSize().width / 2,
+                            this->getContentSize().height / 2);//this->getPosition());// - Vec2(0.4 * base->getContentSize().width,
                                                    //    0.3673 * base->getContentSize().height));
 //    this->base->setAnchorPoint(Point(0,0));
     this->activeRadius = grid->getCellSize().width * 2.5;
     this->time = 0;
     this->delay = 0.5;
     designer = DrawNode::create();
-    designer->drawDot(this->getPosition(), activeRadius, Color4F(0,0,1,0.3f));
+    designer->drawDot(Point(this->getContentSize().width / 2,
+                      this->getContentSize().height / 2),
+                      activeRadius, Color4F(0,0,1,0.3f));
+    
+    this->addChild(designer,-2);
+    this->addChild(base, -1);
 //    CCLOG("Weapon Position x:%f y:%f", this->getPosition().x, this->getPosition().y);
 //    CCLOG("Base Position x:%f y:%f", base->getPosition().x, base->getPosition().y);
 //    CCLOG("Base Anchor x:%f y:%f", base->getAnchorPoint().x, base->getAnchorPoint().y);

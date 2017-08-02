@@ -30,10 +30,13 @@ public:
     enum editMode {EDIT_ROAD, EDIT_WEAPON};
     void setState(int state);
     int getState();
+    bool hasChanged();
+    void setChanged(bool changed);
 
 private:
     int state;
     EventListenerTouchOneByOne *listener;
+    bool changed;
 };
 
 #endif /* FieldCell_h */

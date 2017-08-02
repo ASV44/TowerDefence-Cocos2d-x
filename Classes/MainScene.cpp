@@ -31,29 +31,46 @@ bool MainScene::init()
         this->addChild(tanks[i]->getExplosion());
     }
     
-    auto gridSize = gameField->getGrid()->getGridSize();
-    auto width = int(gridSize.width);
-    auto height = int(gridSize.height);
-    
-    for(int i = 0; i < width; i++) {
-        for(int j = 0; j < height; j++) {
-            auto cell = gameField->getGrid()->getCell(Point(i,j));
-            if(cell->getState() == 2)
-            {
-                auto weapon = new Weapon(gameField->getGrid(), Point(i,j));
-                weapons.push_back(weapon);
-                this->addChild(weapon->getDesigner());
-                this->addChild(weapon->getBase());
-                this->addChild(weapon);
-            }
-        }
-    }
+    this->createWeapons(gameField->getGrid());
     
     this->gameField->addFieldStones();
     
     this->addChild(gameField->getGrid());
     
     this->scheduleUpdate();
+    
+    this->updateSceneWeapons = false;
+    
+    auto listener = EventListenerTouchOneByOne::create();
+    //listener->setSwallowTouches(true);
+    
+    listener->onTouchBegan = [&](Touch* touch, Event* event){
+        // your code
+        log("Main Scene Touch Began");
+        return true; // if you are consuming it
+    };
+    
+    listener->onTouchMoved = [&](Touch* touch, Event* event){
+        //        auto location = touch->getLocation() - origin;
+        //        stones[2]->setPosition(location);
+        //        CCLOG("X:%f Y:%f",location.x, location.y);
+        return true;
+    };
+    
+    listener->onTouchEnded = [&](Touch* touch, Event* event){
+        log("Main Scene Touch End");
+        if(gameField->isOnDebug() && !updateSceneWeapons) {
+            updateSceneWeapons = true;
+        }
+        else if (!gameField->isOnDebug() && updateSceneWeapons){
+            this->updateWeaponsOnScene();
+            updateSceneWeapons = false;
+        }
+        return true;
+    };
+    
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
     
 
     //explosion->check();
@@ -102,9 +119,52 @@ void MainScene::checkColision(vector<Bullet*> bullets)
     }
 }
 
+void MainScene::createWeapons(Grid *grid)
+{
+    auto gridSize = grid->getGridSize();
+    auto width = int(gridSize.width);
+    auto height = int(gridSize.height);
+    
+    for(int i = 0; i < width; i++) {
+        for(int j = 0; j < height; j++) {
+            auto cell = gameField->getGrid()->getCell(Point(i,j));
+            if(cell->getState() == 2)
+            {
+                auto weapon = new Weapon(gameField->getGrid(), Point(i,j));
+                weapons.push_back(weapon);
+                //                this->addChild(weapon->getDesigner());
+                //                this->addChild(weapon->getBase());
+                this->addChild(weapon,2);
+            }
+        }
+    }
+}
 
-
-
+void MainScene::updateWeaponsOnScene()
+{
+    auto gridSize = gameField->getGrid()->getGridSize();
+    auto width = int(gridSize.width);
+    auto height = int(gridSize.height);
+    
+    for(int i = 0; i < weapons.size(); i++) {
+        this->removeChild(weapons[i]);
+    }
+    weapons.clear();
+    
+    for(int i = 0; i < width; i++) {
+        for(int j = 0; j < height; j++) {
+            auto cell = gameField->getGrid()->getCell(Point(i,j));
+            if(cell->getState() == 2)
+            {
+                auto weapon = new Weapon(gameField->getGrid(), Point(i,j));
+                weapons.push_back(weapon);
+                //                this->addChild(weapon->getDesigner());
+                //                this->addChild(weapon->getBase());
+                this->addChild(weapon,2);
+            }
+        }
+    }
+}
 
 
 

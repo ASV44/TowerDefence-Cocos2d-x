@@ -27,7 +27,7 @@ Tank::Tank(Grid *grid)
     //grid->getCell(gridPosition)->setTankState(true);
     this->health = 100;
     this->angle = 0;
-    this->speed = 2;
+    this->speed = 3;
     this->finish = Point(4,22);
     this->activeRadius = 0.75 * tankSize.width;
     this->setVisible(false);
@@ -184,7 +184,7 @@ void Tank::reset()
     this->health = 100;
     this->angle = 0;
     this->setRotation(angle);
-    //this->setVisible(false);
+    this->setVisible(false);
     this->showHealth();
 }
 

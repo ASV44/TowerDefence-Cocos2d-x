@@ -37,6 +37,7 @@ public:
     FieldCell *getCell(Point cell);
     void changeEditMode();
     void setCellsEditMode();
+    bool hasChanged();
     
 private:
     FieldCell ***cells;
@@ -49,7 +50,6 @@ private:
     Sprite *getEditTool(int editMode);
     EventListenerTouchOneByOne *listener;
     bool isEditToolTouch(Sprite *editToll, Point touchPoint);
-    
 };
 
 #endif /* Grid_h */

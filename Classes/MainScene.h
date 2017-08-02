@@ -14,7 +14,7 @@ public:
     void update(float delta);
     virtual bool init();
     void checkColision(vector<Bullet*> bullets);
-    
+    void createWeapons(Grid *grid);
     // implement the "static create()" method manually
     CREATE_FUNC(MainScene);
 private:
@@ -22,6 +22,8 @@ private:
     vector<Tank*> tanks;
     int tanksAmount;
     vector<Weapon*> weapons;
+    bool updateSceneWeapons;
+    void updateWeaponsOnScene();
 };
 
 #endif // __HELLOWORLD_SCENE_H__

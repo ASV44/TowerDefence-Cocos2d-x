@@ -23,7 +23,6 @@ GameField::GameField()
     auto endPoint = Point(visibleSize.width, 0.835 * visibleSize.height);
     
     debugMode = false;
-    
     grid = new Grid(startPoint, endPoint);
     grid->setVisible(false);
     if(!grid->importGridFromJson()) {

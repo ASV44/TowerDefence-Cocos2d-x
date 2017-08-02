@@ -281,3 +281,21 @@ void Grid::setCellsEditMode()
         }
     }
 }
+
+bool Grid::hasChanged()
+{
+    bool hasChanged = false;
+    auto width = int(size.width);
+    auto height = int(size.height);
+    
+    for(int i = 0; i < width; i++) {
+        for(int j = 0; j < height; j++) {
+            if(cells[i][j]->hasChanged()) {
+                hasChanged = true;
+                break;
+            };
+        }
+    }
+    
+    return hasChanged;
+}

@@ -27,6 +27,7 @@ FieldCell::FieldCell(Vec2 position, Point location, Size cellSize)
     
     editMode = EDIT_ROAD;
     tankState = false;
+    this->changed = false;
     
     listener = EventListenerTouchOneByOne::create();
 
@@ -57,6 +58,7 @@ FieldCell::FieldCell(Vec2 position, Point location, Size cellSize)
                 changeState();
             }
         }
+        changed = true;
         return true;
     };
     
@@ -100,20 +102,6 @@ void FieldCell::changeState()
         default:
             break;
     }
-//    if(state == 0) {
-//        state = 1;
-//        this->clear();
-//        this->drawSolidRect(location,
-//                            location + Vec2(cellSize),
-//                            Color4F(1,0,0,0.6f));
-//    }
-//    else {
-//        state = 0;
-//        this->clear();
-//        this->drawRect(location,
-//                       location + Vec2(cellSize),
-//                       Color4F(1,0,0,0.6f));
-//    }
 }
 
 void FieldCell::putWeapon()
@@ -156,4 +144,14 @@ void FieldCell::setState(int state)
             break;
     }
     this->state = state;
+}
+
+bool FieldCell::hasChanged()
+{
+    return changed;
+}
+
+void FieldCell::setChanged(bool changed)
+{
+    this->changed = changed;
 }
