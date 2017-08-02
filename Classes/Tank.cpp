@@ -20,14 +20,15 @@ Tank::Tank(Grid *grid)
     this->tankSize = Size(0.03785 * visibleSize.width,
                          0.06406 * visibleSize.height);
     this->setContentSize(tankSize);
-    this->gridPosition = Point(4,0);
+    this->start = Point(4,0);
+    this->gridPosition = start;
     this->target = Point(4,1);
     this->setPosition(Point(origin.x,
                             origin.y + grid->getCell(gridPosition)->getCenterLocation().y));
     //grid->getCell(gridPosition)->setTankState(true);
     this->health = 100;
     this->angle = 0;
-    this->speed = 3;
+    this->speed = 2;
     this->finish = Point(4,22);
     this->activeRadius = 0.75 * tankSize.width;
     this->setVisible(false);
@@ -44,11 +45,13 @@ void Tank::move()
 {
     auto position = this->getPosition() - origin;
     //CCLOG("Current Position x:%f y:%f", position.x, position.y);
-    auto targetLocation = grid->getCell(this->target)->getCenterLocation();
-    auto deltaPosition = position - targetLocation;
+    auto cell = grid->getCell(this->gridPosition); //cell in which tank is at the moment
+    auto cellPosition = cell->getLocation(); //Coordinates of Left lower vorner of cell
+    auto bound = cellPosition + Point(cell->getCellSize());
     //log("Delta x:%f y:%f", deltaPosition.x, deltaPosition.y);
-    if(abs(deltaPosition.x) >= speed ||
-       abs(deltaPosition.y) >= speed) {
+    if((position.x < bound.x && position.x >= cellPosition.x &&
+       position.y < bound.y && position.y >= cellPosition.y) ||
+       position.x < cellPosition.x ) {
         moveTo(this->target);
     }
     else {
@@ -69,50 +72,109 @@ void Tank::move()
 void Tank::moveTo(Point target)
 {
     auto deltaPosition = gridPosition - target;
-    
+    auto angleVelocity = 10;
     switch (int(deltaPosition.x)) {
         case 0:
             if(deltaPosition.y == -1) {
                 if(angle != 0) {
-                    angle = 0;
+                    if(angle < 0) {
+                        angle += angleVelocity;
+                    }
+                    else {
+                        angle -= angleVelocity;
+                    }
                     this->setRotation(angle);
                     drawHealth->setRotation(-angle);
                     showHealth();
                 }
-                this->setPositionX(getPositionX() + speed);
+                
             }
             else if(deltaPosition.y == 1) {
-                if(angle != 180) {
-                    angle = 180;
+                if(angle != 180 && angle != -180) {
+                    if(angle < 0) {
+                        angle -= angleVelocity;
+                    }
+                    else {
+                        angle += angleVelocity;
+                    }
                     this->setRotation(angle);
                     drawHealth->setRotation(-angle);
                     showHealth();
                 }
-                this->setPositionX(getPositionX() - speed);
             }
             break;
         case -1:
             if(angle != -90) {
-                angle = -90;
+                angle -= angleVelocity;
                 this->setRotation(angle);
                 drawHealth->setRotation(-angle);
                 showHealth();
             }
-            this->setPositionY(getPositionY() + speed);
+            
             break;
         case 1:
             if(angle != 90) {
-                angle = 90;
+                angle += angleVelocity;
                 this->setRotation(angle);
                 drawHealth->setRotation(-angle);
                 showHealth();
             }
-            this->setPositionY(getPositionY() - speed);
             break;
         default:
             break;
     }
+    
+    this->setPositionX(getPositionX() + speed * cos(angle * M_PI / 180));
+    this->setPositionY(getPositionY() + speed * sin(-angle * M_PI / 180));
 }
+
+//void Tank::moveTo(Point target)
+//{
+//    auto deltaPosition = gridPosition - target;
+//    
+//    switch (int(deltaPosition.x)) {
+//        case 0:
+//            if(deltaPosition.y == -1) {
+//                if(angle != 0) {
+//                    angle = 0;
+//                    this->setRotation(angle);
+//                    drawHealth->setRotation(-angle);
+//                    showHealth();
+//                }
+//                this->setPositionX(getPositionX() + speed);
+//            }
+//            else if(deltaPosition.y == 1) {
+//                if(angle != 180) {
+//                    angle = 180;
+//                    this->setRotation(angle);
+//                    drawHealth->setRotation(-angle);
+//                    showHealth();
+//                }
+//                this->setPositionX(getPositionX() - speed);
+//            }
+//            break;
+//        case -1:
+//            if(angle != -90) {
+//                angle = -90;
+//                this->setRotation(angle);
+//                drawHealth->setRotation(-angle);
+//                showHealth();
+//            }
+//            this->setPositionY(getPositionY() + speed);
+//            break;
+//        case 1:
+//            if(angle != 90) {
+//                angle = 90;
+//                this->setRotation(angle);
+//                drawHealth->setRotation(-angle);
+//                showHealth();
+//            }
+//            this->setPositionY(getPositionY() - speed);
+//            break;
+//        default:
+//            break;
+//    }
+//}
 
 Point Tank::getTarget(Point previousPosition)
 {
@@ -260,8 +322,6 @@ Explosion* Tank::getExplosion()
 {
     return this->explosion;
 }
-
-
 
 
 

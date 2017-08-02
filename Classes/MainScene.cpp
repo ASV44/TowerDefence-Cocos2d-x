@@ -24,7 +24,7 @@ bool MainScene::init()
     gameField = new GameField();
     this->addChild(gameField);
     
-    tanksAmount = 10;
+    tanksAmount = 6;
     for(int i = 0; i < tanksAmount; ++i) {
         tanks.push_back(new Tank(gameField->getGrid()));
         this->addChild(tanks[i]);

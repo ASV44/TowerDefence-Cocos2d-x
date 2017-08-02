@@ -40,6 +40,7 @@ private:
     float speed;
     float angle;
     Point target;
+    Point start;
     Point finish;
     Size tankSize;
     FieldCell *getNeighbour(int neighbourCase);
