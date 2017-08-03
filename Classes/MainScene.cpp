@@ -28,6 +28,7 @@ bool MainScene::init()
     for(int i = 0; i < tanksAmount; ++i) {
         tanks.push_back(new Tank(gameField->getGrid()));
         this->addChild(tanks[i]);
+        this->addChild(tanks[i]->getHealthDesigner());
         this->addChild(tanks[i]->getExplosion());
     }
     

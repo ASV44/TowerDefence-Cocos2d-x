@@ -32,6 +32,8 @@ public:
     void showHealth();
     void expload();
     Explosion* getExplosion();
+    void rotate();
+    DrawNode *getHealthDesigner();
     
 private:
     Grid *grid;

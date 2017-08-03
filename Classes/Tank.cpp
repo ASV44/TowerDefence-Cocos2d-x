@@ -33,10 +33,8 @@ Tank::Tank(Grid *grid)
     this->activeRadius = 0.75 * tankSize.width;
     this->setVisible(false);
     this->drawHealth = DrawNode::create();
-    showHealth();
-    this->addChild(drawHealth,100);
+    //this->addChild(drawHealth);
     explosion = new Explosion("explosion.png", Size(5,5), 0.05f);
-    //this->setGlobalZOrder(24);
     
     //CCLOG("Target x:%f y:%f",grid->getCell(target)->getCenterLocation().x,grid->getCell(target)->getCenterLocation().y);
 };
@@ -75,49 +73,38 @@ void Tank::moveTo(Point target)
     auto angleVelocity = 10;
     switch (int(deltaPosition.x)) {
         case 0:
-            if(deltaPosition.y == -1) {
-                if(angle != 0) {
-                    if(angle < 0) {
-                        angle += angleVelocity;
-                    }
-                    else {
-                        angle -= angleVelocity;
-                    }
-                    this->setRotation(angle);
-                    drawHealth->setRotation(-angle);
-                    showHealth();
+            if(deltaPosition.y == -1 && angle != 0) {
+                if(angle < 0) {
+                    angle += angleVelocity;
                 }
+                else {
+                    angle -= angleVelocity;
+                }
+                rotate();
                 
             }
-            else if(deltaPosition.y == 1) {
-                if(angle != 180 && angle != -180) {
-                    if(angle < 0) {
-                        angle -= angleVelocity;
-                    }
-                    else {
-                        angle += angleVelocity;
-                    }
-                    this->setRotation(angle);
-                    drawHealth->setRotation(-angle);
-                    showHealth();
+            else if(deltaPosition.y == 1 &&
+                angle != 180 && angle != -180) {
+                if(angle < 0) {
+                    angle -= angleVelocity;
                 }
+                else {
+                    angle += angleVelocity;
+                }
+                rotate();
             }
             break;
         case -1:
             if(angle != -90) {
                 angle -= angleVelocity;
-                this->setRotation(angle);
-                drawHealth->setRotation(-angle);
-                showHealth();
+                rotate();
             }
             
             break;
         case 1:
             if(angle != 90) {
                 angle += angleVelocity;
-                this->setRotation(angle);
-                drawHealth->setRotation(-angle);
-                showHealth();
+                rotate();
             }
             break;
         default:
@@ -126,55 +113,8 @@ void Tank::moveTo(Point target)
     
     this->setPositionX(getPositionX() + speed * cos(angle * M_PI / 180));
     this->setPositionY(getPositionY() + speed * sin(-angle * M_PI / 180));
+    showHealth();
 }
-
-//void Tank::moveTo(Point target)
-//{
-//    auto deltaPosition = gridPosition - target;
-//    
-//    switch (int(deltaPosition.x)) {
-//        case 0:
-//            if(deltaPosition.y == -1) {
-//                if(angle != 0) {
-//                    angle = 0;
-//                    this->setRotation(angle);
-//                    drawHealth->setRotation(-angle);
-//                    showHealth();
-//                }
-//                this->setPositionX(getPositionX() + speed);
-//            }
-//            else if(deltaPosition.y == 1) {
-//                if(angle != 180) {
-//                    angle = 180;
-//                    this->setRotation(angle);
-//                    drawHealth->setRotation(-angle);
-//                    showHealth();
-//                }
-//                this->setPositionX(getPositionX() - speed);
-//            }
-//            break;
-//        case -1:
-//            if(angle != -90) {
-//                angle = -90;
-//                this->setRotation(angle);
-//                drawHealth->setRotation(-angle);
-//                showHealth();
-//            }
-//            this->setPositionY(getPositionY() + speed);
-//            break;
-//        case 1:
-//            if(angle != 90) {
-//                angle = 90;
-//                this->setRotation(angle);
-//                drawHealth->setRotation(-angle);
-//                showHealth();
-//            }
-//            this->setPositionY(getPositionY() - speed);
-//            break;
-//        default:
-//            break;
-//    }
-//}
 
 Point Tank::getTarget(Point previousPosition)
 {
@@ -247,7 +187,7 @@ void Tank::reset()
     this->angle = 0;
     this->setRotation(angle);
     this->setVisible(false);
-    this->showHealth();
+    drawHealth->setVisible(false);
 }
 
 void Tank::setDamage(float damage)
@@ -276,6 +216,7 @@ bool Tank::canMove()
     if(canMove && !this->isVisible()) {
         this->setVisible(true);
         grid->getCell(gridPosition)->setTankState(true);
+        drawHealth->setVisible(true);
     }
     
     return canMove;
@@ -286,23 +227,11 @@ void Tank::showHealth()
     Point startHealth, startDamage;
     auto healthLine = Vec2(tankSize.width * health / 100, 5);
     auto damageLine = Vec2(tankSize.width - healthLine.x, 5);
-    switch (int(angle)) {
-        case 0:
-            startHealth = Point(0, tankSize.height * 1.25);
-            startDamage = Point(healthLine.x, tankSize.height * 1.25);
-            break;
-        case -90:
-            startHealth = Point(-tankSize.height, tankSize.width * 1.25);
-            startDamage = Point(-tankSize.height + healthLine.x, tankSize.width * 1.25);
-            break;
-        case 90:
-            startHealth = Point(0, tankSize.width * 0.25);
-            startDamage = Point( healthLine.x, tankSize.width * 0.25);
-            break;
-        default:
-            break;
-    }
     
+    startHealth = Point(this->getPosition().x  - tankSize.width / 2,
+                        this->getPosition().y + tankSize.height * 0.75);
+    startDamage = Point(startHealth.x + healthLine.x,
+                        startHealth.y);
     drawHealth->clear();
     
     drawHealth->drawSolidRect(startHealth,
@@ -323,9 +252,15 @@ Explosion* Tank::getExplosion()
     return this->explosion;
 }
 
+void Tank::rotate()
+{
+    this->setRotation(angle);
+}
 
-
-
+DrawNode* Tank::getHealthDesigner()
+{
+    return drawHealth;
+}
 
 
 
