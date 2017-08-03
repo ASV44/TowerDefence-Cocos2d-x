@@ -136,12 +136,12 @@ void Weapon::fire(Point target)
     auto path = Vec2();
     auto selfPosition = this->getPosition();
     target = target + origin;
-    auto delta_x = target.x - selfPosition.x;
+    auto deltaPosition = target - selfPosition;
     
     path.x = (target.y - selfPosition.y) / (target.x - selfPosition.x);
     path.y = (target.x * selfPosition.y - selfPosition.x * target.y) / (target.x - selfPosition.x);
     
-    auto bullet = new Bullet(selfPosition, path, delta_x);
+    auto bullet = new Bullet(selfPosition, path, deltaPosition);
     bullets.push_back(bullet);
     this->getParent()->addChild(bullet);
 }
@@ -174,6 +174,7 @@ vector<Bullet*> Weapon::getBullets()
 void Weapon::dropBullets(vector<int> deleteBullets) {
     for(int i = 0; i < deleteBullets.size(); ++i) {
         auto bullet = bullets[deleteBullets[i] - i];
+        bullet->getParent()->removeChild(bullet);
         bullets.erase(bullets.begin() + deleteBullets[i] - i);
         bullet->release();
     }
@@ -184,7 +185,18 @@ DrawNode* Weapon::getDesigner()
     return this->designer;
 }
 
-
+void Weapon::dropBullets()
+{
+    for(int i = 0; i < bullets.size(); ++i) {
+        auto bullet = bullets[i];
+        if(bullet->getParent() != NULL) {
+            bullet->getParent()->removeChild(bullet);
+        }
+        bullet->release();
+    }
+    
+    bullets.clear();
+}
 
 
 

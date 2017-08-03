@@ -7,6 +7,8 @@
 #include "Weapon.h"
 #include "Explosion.h"
 
+using namespace std;
+
 class MainScene : public cocos2d::Scene
 {
 public:
@@ -15,6 +17,9 @@ public:
     virtual bool init();
     void checkColision(vector<Bullet*> bullets);
     void createWeapons(Grid *grid);
+    bool weaponExist(Point gridPosition); // returns true if on scene exist weapons with suxh coordinates in grid
+    void filterWeapons(vector<Point> newGridWeapons);
+    void addNewWeapons(vector<Point> newGridWeapons);
     // implement the "static create()" method manually
     CREATE_FUNC(MainScene);
 private:

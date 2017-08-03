@@ -30,10 +30,11 @@ public:
     vector<Bullet*> getBullets();
     void dropBullets(vector<int> deleteBullets);
     DrawNode* getDesigner();
+    CC_SYNTHESIZE(Point, gridPosition, GridPosition);
+    void dropBullets();
     
 private:
     Grid *grid;
-    Point gridPosition;
     Sprite *base;
     float angle;
     float activeRadius;

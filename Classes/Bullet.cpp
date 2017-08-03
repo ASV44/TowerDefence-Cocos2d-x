@@ -8,7 +8,7 @@
 
 #include "Bullet.h"
 
-Bullet::Bullet(Point startPoint, Vec2 path, float delta_x)
+Bullet::Bullet(Point startPoint, Vec2 path, Point deltaPosition)
 {
     auto visibleSize = Director::getInstance()->getVisibleSize();
     auto origin = Director::getInstance()->getVisibleOrigin();
@@ -19,7 +19,7 @@ Bullet::Bullet(Point startPoint, Vec2 path, float delta_x)
                               0.0125 * visibleSize.height));
     this->setGlobalZOrder(24);
     this->path = path;
-    this->delta_x = delta_x;
+    this->deltaPosition = deltaPosition;
     this->damage = 34;
     this->speed = 2.5;
 }
@@ -28,13 +28,22 @@ void Bullet::update()
 {
     auto currentPosition = this->getPosition();
     
-    if(delta_x < 0) {
-        currentPosition.x -= speed;
+    if(deltaPosition.x != 0) {
+        if(deltaPosition.x < 0) {
+            currentPosition.x -= speed;
+        }
+        else {
+            currentPosition.x += speed;
+        }
+        currentPosition.y = path.x * currentPosition.x + path.y;
+    } else {
+        if(deltaPosition.y < 0) {
+            currentPosition.y -= speed;
+        }
+        else {
+            currentPosition.y += speed;
+        }
     }
-    else {
-        currentPosition.x += speed;
-    }
-    currentPosition.y = path.x * currentPosition.x + path.y;
     
     this->setPosition(currentPosition);
 }

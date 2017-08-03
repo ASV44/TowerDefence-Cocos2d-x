@@ -24,7 +24,7 @@ bool MainScene::init()
     gameField = new GameField();
     this->addChild(gameField);
     
-    tanksAmount = 6;
+    tanksAmount = 10;
     for(int i = 0; i < tanksAmount; ++i) {
         tanks.push_back(new Tank(gameField->getGrid()));
         this->addChild(tanks[i]);
@@ -143,32 +143,67 @@ void MainScene::createWeapons(Grid *grid)
 
 void MainScene::updateWeaponsOnScene()
 {
+    vector<Point> gridWeapons;
     auto gridSize = gameField->getGrid()->getGridSize();
     auto width = int(gridSize.width);
     auto height = int(gridSize.height);
     
-    for(int i = 0; i < weapons.size(); i++) {
-        this->removeChild(weapons[i]);
-    }
-    weapons.clear();
-    
     for(int i = 0; i < width; i++) {
         for(int j = 0; j < height; j++) {
             auto cell = gameField->getGrid()->getCell(Point(i,j));
-            if(cell->getState() == 2)
-            {
-                auto weapon = new Weapon(gameField->getGrid(), Point(i,j));
-                weapons.push_back(weapon);
-                //                this->addChild(weapon->getDesigner());
-                //                this->addChild(weapon->getBase());
-                this->addChild(weapon,2);
+            if(cell->getState() == 2) {
+                gridWeapons.push_back(Point(i,j));
             }
+        }
+    }
+    
+    filterWeapons(gridWeapons);
+    addNewWeapons(gridWeapons);
+}
+
+
+bool MainScene::weaponExist(Point gridPosition)
+{
+    bool weaponExist = false;
+    for(int k = 0; k < weapons.size(); k++) {
+        if(weapons[k]->getGridPosition() == gridPosition)
+        {
+            weaponExist = true;
+            break;
+        }
+    }
+    
+    return weaponExist;
+}
+
+void MainScene::filterWeapons(vector<Point> newGridWeapons)
+{
+    int deletedWeapons = 0;
+    
+    for(int i = 0; i < weapons.size(); i++) {
+        if(find(newGridWeapons.begin(), newGridWeapons.end(), weapons[i]->getGridPosition()) == newGridWeapons.end()) {
+            auto weapon = weapons[i - deletedWeapons];
+            weapons.erase(weapons.begin() + i - deletedWeapons);
+            this->removeChild(weapon);
+            weapon->dropBullets();
+            weapon->release();
+            deletedWeapons++;
         }
     }
 }
 
-
-
+void MainScene::addNewWeapons(vector<Point> newGridWeapons)
+{
+    for(int i = 0; i < newGridWeapons.size(); ++i) {
+        if(!weaponExist(newGridWeapons[i])) {
+            auto weapon = new Weapon(gameField->getGrid(), newGridWeapons[i]);
+            weapons.push_back(weapon);
+            //                this->addChild(weapon->getDesigner());
+            //                this->addChild(weapon->getBase());
+            this->addChild(weapon,2);
+        }
+    }
+}
 
 
 
