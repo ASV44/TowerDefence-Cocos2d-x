@@ -24,10 +24,10 @@ public:
     CC_SYNTHESIZE(Point, centerLocation, CenterLocation);
     CC_SYNTHESIZE(int, editMode, EditMode);
     CC_SYNTHESIZE(bool, tankState, TankState);
-    void changeState();
+    void changeState(int newState);
     bool inCell(Point touchPoint);
     void putWeapon();
-    enum editMode {EDIT_ROAD, EDIT_WEAPON};
+    enum editMode {EDIT_ROAD, EDIT_WEAPON, EDIT_ICE};
     void setState(int state);
     int getState();
     bool hasChanged();

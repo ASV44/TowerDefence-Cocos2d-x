@@ -5,7 +5,8 @@
 #include "GameFIeld.h"
 #include "Tank.h"
 #include "Weapon.h"
-#include "Explosion.h"
+//#include "Explosion.h"
+#include "IceWeapon.h"
 
 using namespace std;
 
@@ -26,7 +27,9 @@ private:
     GameField *gameField;
     vector<Tank*> tanks;
     int tanksAmount;
+    enum weaponsType {DEFAULT_WEAPON = 2, ICE_WEAPON = 3};
     vector<Weapon*> weapons;
+    vector<IceWeapon*> iceWeapons;
     bool updateSceneWeapons;
     void updateWeaponsOnScene();
 };

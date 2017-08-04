@@ -48,17 +48,12 @@ FieldCell::FieldCell(Vec2 position, Point location, Size cellSize)
         auto parent = this->getParent();
         if(inCell(touch->getStartLocation()) &&
            parent->isVisible()) {
-            if(editMode == EDIT_WEAPON) {
-                putWeapon();
-            }
-            else if(editMode == EDIT_ROAD) {
-                auto row = int(this->gridPosition.x);
-                auto column = int(this->gridPosition.y);
-                CCLOG("Cell Field row:%d column:%d Touch Ended",row,column);
-                changeState();
-            }
+            this->changeState(editMode);
         }
         changed = true;
+        auto row = int(this->gridPosition.x);
+        auto column = int(this->gridPosition.y);
+        CCLOG("Cell Field row:%d column:%d Touch Ended",row,column);
         return true;
     };
     
@@ -82,40 +77,30 @@ bool FieldCell::inCell(Point touchPoint)
     return false;
 }
 
-void FieldCell::changeState()
+void FieldCell::changeState(int newState)
 {
-    switch (state) {
-        case 0:
-            state = 1;
-            this->clear();
-            this->drawSolidRect(location,
-                                location + Vec2(cellSize),
-                                Color4F(1,0,0,0.6f));
-            break;
-        case 1:
-            state = 0;
-            this->clear();
-            this->drawRect(location,
-                           location + Vec2(cellSize),
-                           Color4F(1,0,0,0.6f));
-            break;
-        default:
-            break;
+    newState += 1;
+    if(this->state == 0) {
+        setState(newState);
+    }
+    else if(this->state == newState) {
+        setState(0);
     }
 }
 
 void FieldCell::putWeapon()
 {
-    this->clear();
     switch (state) {
         case 0:
             state = 2;
+            this->clear();
             this->drawSolidRect(location,
                                 location + Vec2(cellSize),
                                 Color4F(0,0,1,0.6f));
             break;
         case 2:
             state = 0;
+            this->clear();
             this->drawRect(location,
                            location + Vec2(cellSize),
                            Color4F(1,0,0,0.6f));
@@ -139,6 +124,11 @@ void FieldCell::setState(int state)
             this->drawSolidRect(location,
                                 location + Vec2(cellSize),
                                 Color4F(0,0,1,0.6f));
+            break;
+        case 3:
+            this->drawSolidRect(location,
+                                location + Vec2(cellSize),
+                                Color4F(0.349f,0.784f,0.811f,0.6f));
             break;
         default:
             break;

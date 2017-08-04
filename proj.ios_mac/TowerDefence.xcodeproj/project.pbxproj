@@ -57,6 +57,14 @@
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
+		D63F001F1F3452030019920C /* IceWeapon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D63F001E1F3452030019920C /* IceWeapon.cpp */; };
+		D63F00201F3452030019920C /* IceWeapon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D63F001E1F3452030019920C /* IceWeapon.cpp */; };
+		D63F00271F34681B0019920C /* iceWeapon.png in Resources */ = {isa = PBXBuildFile; fileRef = D63F00261F34681B0019920C /* iceWeapon.png */; };
+		D63F00281F34681B0019920C /* iceWeapon.png in Resources */ = {isa = PBXBuildFile; fileRef = D63F00261F34681B0019920C /* iceWeapon.png */; };
+		D63F002A1F34762B0019920C /* ice_weapon_base.png in Resources */ = {isa = PBXBuildFile; fileRef = D63F00291F34762B0019920C /* ice_weapon_base.png */; };
+		D63F002B1F34762B0019920C /* ice_weapon_base.png in Resources */ = {isa = PBXBuildFile; fileRef = D63F00291F34762B0019920C /* ice_weapon_base.png */; };
+		D63F89901F33765E00D98595 /* ice_weapon.png in Resources */ = {isa = PBXBuildFile; fileRef = D63F898F1F33765E00D98595 /* ice_weapon.png */; };
+		D63F89911F33765E00D98595 /* ice_weapon.png in Resources */ = {isa = PBXBuildFile; fileRef = D63F898F1F33765E00D98595 /* ice_weapon.png */; };
 		D644CA491F32476D003E7BBC /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D644CA371F32476D003E7BBC /* AppDelegate.cpp */; };
 		D644CA4A1F32476D003E7BBC /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D644CA371F32476D003E7BBC /* AppDelegate.cpp */; };
 		D644CA4B1F32476D003E7BBC /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D644CA391F32476D003E7BBC /* Bullet.cpp */; };
@@ -200,6 +208,11 @@
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		D63F001C1F3451E80019920C /* IceWeapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IceWeapon.h; sourceTree = "<group>"; };
+		D63F001E1F3452030019920C /* IceWeapon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IceWeapon.cpp; sourceTree = "<group>"; };
+		D63F00261F34681B0019920C /* iceWeapon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iceWeapon.png; sourceTree = "<group>"; };
+		D63F00291F34762B0019920C /* ice_weapon_base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ice_weapon_base.png; sourceTree = "<group>"; };
+		D63F898F1F33765E00D98595 /* ice_weapon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ice_weapon.png; sourceTree = "<group>"; };
 		D644CA371F32476D003E7BBC /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppDelegate.cpp; sourceTree = "<group>"; };
 		D644CA381F32476D003E7BBC /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D644CA391F32476D003E7BBC /* Bullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bullet.cpp; sourceTree = "<group>"; };
@@ -375,6 +388,9 @@
 				D644CA671F324BB1003E7BBC /* tower_weapon.png */,
 				D644CA681F324BB1003E7BBC /* weapon.png */,
 				D644CA691F324BB1003E7BBC /* weaponSelected.png */,
+				D63F898F1F33765E00D98595 /* ice_weapon.png */,
+				D63F00261F34681B0019920C /* iceWeapon.png */,
+				D63F00291F34762B0019920C /* ice_weapon_base.png */,
 				521A8EA819F11F5000D177D7 /* fonts */,
 				3EACC98E19EE6D4300EB3C5E /* res */,
 			);
@@ -403,6 +419,8 @@
 				D644CA3C1F32476D003E7BBC /* Explosion.h */,
 				D644CA471F32476D003E7BBC /* Weapon.cpp */,
 				D644CA481F32476D003E7BBC /* Weapon.h */,
+				D63F001E1F3452030019920C /* IceWeapon.cpp */,
+				D63F001C1F3451E80019920C /* IceWeapon.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -569,11 +587,13 @@
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				D644CA761F324BB1003E7BBC /* selectedEdit.png in Resources */,
+				D63F002A1F34762B0019920C /* ice_weapon_base.png in Resources */,
 				521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */,
 				D644CA801F324BB1003E7BBC /* tower_base.png in Resources */,
 				521A8EA919F11F5000D177D7 /* fonts in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
+				D63F89901F33765E00D98595 /* ice_weapon.png in Resources */,
 				D644CA781F324BB1003E7BBC /* stone_1.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
 				D644CA7E1F324BB1003E7BBC /* tank.png in Resources */,
@@ -584,6 +604,7 @@
 				D644CA7C1F324BB1003E7BBC /* stone_3.png in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
 				D644CA721F324BB1003E7BBC /* road.png in Resources */,
+				D63F00271F34681B0019920C /* iceWeapon.png in Resources */,
 				3EACC98F19EE6D4300EB3C5E /* res in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				D644CA6A1F324BB1003E7BBC /* background.png in Resources */,
@@ -602,6 +623,8 @@
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
 				D644CA731F324BB1003E7BBC /* road.png in Resources */,
 				D644CA751F324BB1003E7BBC /* roadSelected.png in Resources */,
+				D63F002B1F34762B0019920C /* ice_weapon_base.png in Resources */,
+				D63F89911F33765E00D98595 /* ice_weapon.png in Resources */,
 				D644CA7D1F324BB1003E7BBC /* stone_3.png in Resources */,
 				D644CA6B1F324BB1003E7BBC /* background.png in Resources */,
 				D644CA851F324BB1003E7BBC /* weapon.png in Resources */,
@@ -613,6 +636,7 @@
 				D644CA711F324BB1003E7BBC /* fire_bullet.png in Resources */,
 				D644CA791F324BB1003E7BBC /* stone_1.png in Resources */,
 				D644CA811F324BB1003E7BBC /* tower_base.png in Resources */,
+				D63F00281F34681B0019920C /* iceWeapon.png in Resources */,
 				D644CA871F324BB1003E7BBC /* weaponSelected.png in Resources */,
 				D644CA831F324BB1003E7BBC /* tower_weapon.png in Resources */,
 				D644CA771F324BB1003E7BBC /* selectedEdit.png in Resources */,
@@ -638,6 +662,7 @@
 				D644CA511F32476D003E7BBC /* GameField.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				D644CA4F1F32476D003E7BBC /* FieldCell.cpp in Sources */,
+				D63F001F1F3452030019920C /* IceWeapon.cpp in Sources */,
 				D644CA4D1F32476D003E7BBC /* Explosion.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -651,6 +676,7 @@
 				D644CA561F32476D003E7BBC /* MainScene.cpp in Sources */,
 				D644CA4A1F32476D003E7BBC /* AppDelegate.cpp in Sources */,
 				D644CA501F32476D003E7BBC /* FieldCell.cpp in Sources */,
+				D63F00201F3452030019920C /* IceWeapon.cpp in Sources */,
 				D644CA4C1F32476D003E7BBC /* Bullet.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				D644CA5A1F32476D003E7BBC /* Weapon.cpp in Sources */,

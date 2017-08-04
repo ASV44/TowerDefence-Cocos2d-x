@@ -51,7 +51,7 @@ Grid::Grid(Point startPoint, Point endPoint)
     }
     //this->setGlobalZOrder(100);
     editMode = FieldCell::EDIT_ROAD;
-    editToolsAMount = 2;
+    editToolsAMount = 3;
     editTools = new Sprite*[editToolsAMount];
     for(int i = 0; i < editToolsAMount; ++i) {
         editTools[i] = getEditTool(i);
@@ -245,6 +245,9 @@ Sprite* Grid::getEditTool(int editMode) {
             break;
         case FieldCell::EDIT_WEAPON:
             return Sprite::create("weapon.png");
+            break;
+        case FieldCell::EDIT_ICE:
+            return Sprite::create("iceWeapon.png");
             break;
         default:
             return NULL;

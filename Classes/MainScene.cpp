@@ -88,6 +88,11 @@ void MainScene::update(float delta) {
             checkColision(weapons[i]->getBullets());
             weapons[i]->update(delta);
         }
+        for(int i = 0; i < iceWeapons.size(); i++)
+        {
+            checkColision(iceWeapons[i]->getBullets());
+            iceWeapons[i]->update(delta);
+        }
         for(int i = 0; i < tanks.size(); i++) {
             if(tanks[i]->canMove()) {
                 tanks[i]->move();
@@ -129,14 +134,28 @@ void MainScene::createWeapons(Grid *grid)
     for(int i = 0; i < width; i++) {
         for(int j = 0; j < height; j++) {
             auto cell = gameField->getGrid()->getCell(Point(i,j));
-            if(cell->getState() == 2)
-            {
-                auto weapon = new Weapon(gameField->getGrid(), Point(i,j));
-                weapons.push_back(weapon);
-                //                this->addChild(weapon->getDesigner());
-                //                this->addChild(weapon->getBase());
-                this->addChild(weapon,2);
+            switch (int(cell->getState())) {
+                case DEFAULT_WEAPON:
+                    weapons.push_back(new Weapon(gameField->getGrid(), Point(i,j)));
+                    this->addChild(weapons.back(),2);
+                    weapons.back()->addNodes();
+                    break;
+                case ICE_WEAPON:
+                    iceWeapons.push_back(new IceWeapon(gameField->getGrid(), Point(i,j)));
+                    this->addChild(iceWeapons.back(),2);
+                    iceWeapons.back()->addNodes();
+                    break;
+                default:
+                    break;
             }
+//            if(cell->getState() == 2)
+//            {
+//                auto weapon = new Weapon(gameField->getGrid(), Point(i,j));
+//                weapons.push_back(weapon);
+//                //                this->addChild(weapon->getDesigner());
+//                //                this->addChild(weapon->getBase());
+//                this->addChild(weapon,2);
+//            }
         }
     }
 }

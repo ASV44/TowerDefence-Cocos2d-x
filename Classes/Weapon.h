@@ -32,8 +32,10 @@ public:
     DrawNode* getDesigner();
     CC_SYNTHESIZE(Point, gridPosition, GridPosition);
     void dropBullets();
+    void drawActiveRadius(Color4F color);
+    void addNodes();
     
-private:
+protected:
     Grid *grid;
     Sprite *base;
     float angle;
