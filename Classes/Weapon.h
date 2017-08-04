@@ -23,7 +23,7 @@ public:
     Point findTarget();
     float distanceTo(Point target);
     void update(float delta);
-    void fire(Point target);
+    virtual void fire(Point target);
     Vec2 origin;
     float time;
     float getAngle(Point target, float distance);
@@ -34,6 +34,7 @@ public:
     void dropBullets();
     void drawActiveRadius(Color4F color);
     void addNodes();
+    void removeFromParent();
     
 protected:
     Grid *grid;

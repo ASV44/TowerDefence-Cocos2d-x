@@ -72,8 +72,6 @@ bool MainScene::init()
     
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
-    
-
     //explosion->check();
     
     
@@ -88,18 +86,12 @@ void MainScene::update(float delta) {
             checkColision(weapons[i]->getBullets());
             weapons[i]->update(delta);
         }
-        for(int i = 0; i < iceWeapons.size(); i++)
-        {
-            checkColision(iceWeapons[i]->getBullets());
-            iceWeapons[i]->update(delta);
-        }
         for(int i = 0; i < tanks.size(); i++) {
             if(tanks[i]->canMove()) {
                 tanks[i]->move();
             }
         }
     }
-    log("");
 }
 
 void MainScene::checkColision(vector<Bullet*> bullets)
@@ -134,28 +126,9 @@ void MainScene::createWeapons(Grid *grid)
     for(int i = 0; i < width; i++) {
         for(int j = 0; j < height; j++) {
             auto cell = gameField->getGrid()->getCell(Point(i,j));
-            switch (int(cell->getState())) {
-                case DEFAULT_WEAPON:
-                    weapons.push_back(new Weapon(gameField->getGrid(), Point(i,j)));
-                    this->addChild(weapons.back(),2);
-                    weapons.back()->addNodes();
-                    break;
-                case ICE_WEAPON:
-                    iceWeapons.push_back(new IceWeapon(gameField->getGrid(), Point(i,j)));
-                    this->addChild(iceWeapons.back(),2);
-                    iceWeapons.back()->addNodes();
-                    break;
-                default:
-                    break;
+            if(cell->getState() >= 2) {
+                createWeapon(cell->getState(), Point(i,j));
             }
-//            if(cell->getState() == 2)
-//            {
-//                auto weapon = new Weapon(gameField->getGrid(), Point(i,j));
-//                weapons.push_back(weapon);
-//                //                this->addChild(weapon->getDesigner());
-//                //                this->addChild(weapon->getBase());
-//                this->addChild(weapon,2);
-//            }
         }
     }
 }
@@ -163,6 +136,7 @@ void MainScene::createWeapons(Grid *grid)
 void MainScene::updateWeaponsOnScene()
 {
     vector<Point> gridWeapons;
+    vector<FieldCell*> gridWeaponsCells;
     auto gridSize = gameField->getGrid()->getGridSize();
     auto width = int(gridSize.width);
     auto height = int(gridSize.height);
@@ -170,14 +144,15 @@ void MainScene::updateWeaponsOnScene()
     for(int i = 0; i < width; i++) {
         for(int j = 0; j < height; j++) {
             auto cell = gameField->getGrid()->getCell(Point(i,j));
-            if(cell->getState() == 2) {
-                gridWeapons.push_back(Point(i,j));
+            if(cell->getState() >= 2) {
+                gridWeapons.push_back(cell->getCellPosition());
+                gridWeaponsCells.push_back(cell);
             }
         }
     }
     
     filterWeapons(gridWeapons);
-    addNewWeapons(gridWeapons);
+    addNewWeapons(gridWeaponsCells);
 }
 
 
@@ -203,7 +178,7 @@ void MainScene::filterWeapons(vector<Point> newGridWeapons)
         if(find(newGridWeapons.begin(), newGridWeapons.end(), weapons[i]->getGridPosition()) == newGridWeapons.end()) {
             auto weapon = weapons[i - deletedWeapons];
             weapons.erase(weapons.begin() + i - deletedWeapons);
-            this->removeChild(weapon);
+            weapon->removeFromParent();
             weapon->dropBullets();
             weapon->release();
             deletedWeapons++;
@@ -211,20 +186,34 @@ void MainScene::filterWeapons(vector<Point> newGridWeapons)
     }
 }
 
-void MainScene::addNewWeapons(vector<Point> newGridWeapons)
+void MainScene::addNewWeapons(vector<FieldCell*> newGridWeapons)
 {
     for(int i = 0; i < newGridWeapons.size(); ++i) {
-        if(!weaponExist(newGridWeapons[i])) {
-            auto weapon = new Weapon(gameField->getGrid(), newGridWeapons[i]);
-            weapons.push_back(weapon);
-            //                this->addChild(weapon->getDesigner());
-            //                this->addChild(weapon->getBase());
-            this->addChild(weapon,2);
+        if(!weaponExist(newGridWeapons[i]->getCellPosition())) {
+            createWeapon(newGridWeapons[i]->getState(),
+                         newGridWeapons[i]->getCellPosition());
         }
     }
 }
 
+void MainScene::createWeapon(float type, Point gridPosition)
+{
+    int weaponType = int(type);
+    switch (weaponType) {
+        case DEFAULT_WEAPON:
+            weapons.push_back(new Weapon(gameField->getGrid(), gridPosition));
 
+            break;
+        case ICE_WEAPON:
+            weapons.push_back(new IceWeapon(gameField->getGrid(), gridPosition));
+            break;
+        default:
+            break;
+    }
+    
+    this->addChild(weapons.back(),2);
+    weapons.back()->addNodes();
+}
 
 
 

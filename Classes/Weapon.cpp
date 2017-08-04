@@ -139,7 +139,7 @@ void Weapon::fire(Point target)
     path.x = (target.y - selfPosition.y) / (target.x - selfPosition.x);
     path.y = (target.x * selfPosition.y - selfPosition.x * target.y) / (target.x - selfPosition.x);
     
-    auto bullet = new Bullet(selfPosition, path, deltaPosition);
+    auto bullet = new Bullet(selfPosition, path, deltaPosition, Bullet::DEFAULT_BULLET);
     bullets.push_back(bullet);
     this->getParent()->addChild(bullet);
 }
@@ -209,7 +209,12 @@ void Weapon::addNodes()
     this->getParent()->addChild(base, 1);
 }
 
-
+void Weapon::removeFromParent()
+{
+    this->getParent()->removeChild(designer);
+    this->getParent()->removeChild(base);
+    this->getParent()->removeChild(this);
+}
 
 
 

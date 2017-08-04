@@ -18,9 +18,10 @@ public:
     virtual bool init();
     void checkColision(vector<Bullet*> bullets);
     void createWeapons(Grid *grid);
-    bool weaponExist(Point gridPosition); // returns true if on scene exist weapons with suxh coordinates in grid
+    bool weaponExist(Point gridPosition); // returns true if on scene exist weapons with such coordinates in grid
     void filterWeapons(vector<Point> newGridWeapons);
-    void addNewWeapons(vector<Point> newGridWeapons);
+    void addNewWeapons(vector<FieldCell*> newGridWeapons);
+    void createWeapon(float type, Point gridPosition);
     // implement the "static create()" method manually
     CREATE_FUNC(MainScene);
 private:
@@ -29,7 +30,7 @@ private:
     int tanksAmount;
     enum weaponsType {DEFAULT_WEAPON = 2, ICE_WEAPON = 3};
     vector<Weapon*> weapons;
-    vector<IceWeapon*> iceWeapons;
+    //vector<IceWeapon*> iceWeapons;
     bool updateSceneWeapons;
     void updateWeaponsOnScene();
 };

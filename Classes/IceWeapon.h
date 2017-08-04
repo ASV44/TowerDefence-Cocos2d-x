@@ -15,6 +15,7 @@ class IceWeapon : public Weapon {
     
 public:
     IceWeapon(Grid *grid, Point gridPosition);
+    void fire(Point target);
 
 private:
     
