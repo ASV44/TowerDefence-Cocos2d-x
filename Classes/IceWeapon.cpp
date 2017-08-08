@@ -19,7 +19,7 @@ IceWeapon::IceWeapon(Grid *grid, Point gridPosition) : Weapon(grid, gridPosition
     this->base->setTexture("ice_weapon_base.png");
     this->base->setContentSize(Size(0.0378 * visibleSize.width,
                                     0.0613 * visibleSize.height));
-    drawActiveRadius(Color4F(0.349f,0.784f,0.811f,0.45f));
+    drawActiveRadius(Color4F(0.349f,0.784f,0.811f,0.4f));
     
     this->delay = 0;
 }
@@ -36,5 +36,5 @@ void IceWeapon::fire(Point target)
     
     auto bullet = new Bullet(selfPosition, path, deltaPosition, Bullet::ICE_BULLET);
     bullets.push_back(bullet);
-    this->getParent()->addChild(bullet);
+    this->getParent()->addChild(bullet,2);
 }

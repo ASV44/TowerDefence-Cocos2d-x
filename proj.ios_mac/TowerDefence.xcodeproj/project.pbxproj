@@ -67,6 +67,14 @@
 		D63F89911F33765E00D98595 /* ice_weapon.png in Resources */ = {isa = PBXBuildFile; fileRef = D63F898F1F33765E00D98595 /* ice_weapon.png */; };
 		D6428A321F349FB800DDB1BD /* ice_bullet.png in Resources */ = {isa = PBXBuildFile; fileRef = D6428A311F349FB800DDB1BD /* ice_bullet.png */; };
 		D6428A331F349FB800DDB1BD /* ice_bullet.png in Resources */ = {isa = PBXBuildFile; fileRef = D6428A311F349FB800DDB1BD /* ice_bullet.png */; };
+		D642F8891F39D2D500A64029 /* FireWeapon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D642F8881F39D2D500A64029 /* FireWeapon.cpp */; };
+		D642F88A1F39D2D500A64029 /* FireWeapon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D642F8881F39D2D500A64029 /* FireWeapon.cpp */; };
+		D642F8911F39DA1500A64029 /* fire_weapon.png in Resources */ = {isa = PBXBuildFile; fileRef = D642F88E1F39DA1500A64029 /* fire_weapon.png */; };
+		D642F8921F39DA1500A64029 /* fire_weapon.png in Resources */ = {isa = PBXBuildFile; fileRef = D642F88E1F39DA1500A64029 /* fire_weapon.png */; };
+		D642F8931F39DA1500A64029 /* fire_weapon_base.png in Resources */ = {isa = PBXBuildFile; fileRef = D642F88F1F39DA1500A64029 /* fire_weapon_base.png */; };
+		D642F8941F39DA1500A64029 /* fire_weapon_base.png in Resources */ = {isa = PBXBuildFile; fileRef = D642F88F1F39DA1500A64029 /* fire_weapon_base.png */; };
+		D642F8951F39DA1500A64029 /* fireWeapon.png in Resources */ = {isa = PBXBuildFile; fileRef = D642F8901F39DA1500A64029 /* fireWeapon.png */; };
+		D642F8961F39DA1500A64029 /* fireWeapon.png in Resources */ = {isa = PBXBuildFile; fileRef = D642F8901F39DA1500A64029 /* fireWeapon.png */; };
 		D644CA491F32476D003E7BBC /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D644CA371F32476D003E7BBC /* AppDelegate.cpp */; };
 		D644CA4A1F32476D003E7BBC /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D644CA371F32476D003E7BBC /* AppDelegate.cpp */; };
 		D644CA4B1F32476D003E7BBC /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D644CA391F32476D003E7BBC /* Bullet.cpp */; };
@@ -216,6 +224,11 @@
 		D63F00291F34762B0019920C /* ice_weapon_base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ice_weapon_base.png; sourceTree = "<group>"; };
 		D63F898F1F33765E00D98595 /* ice_weapon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ice_weapon.png; sourceTree = "<group>"; };
 		D6428A311F349FB800DDB1BD /* ice_bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ice_bullet.png; sourceTree = "<group>"; };
+		D642F8881F39D2D500A64029 /* FireWeapon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FireWeapon.cpp; sourceTree = "<group>"; };
+		D642F88D1F39D30000A64029 /* FireWeapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FireWeapon.h; sourceTree = "<group>"; };
+		D642F88E1F39DA1500A64029 /* fire_weapon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fire_weapon.png; sourceTree = "<group>"; };
+		D642F88F1F39DA1500A64029 /* fire_weapon_base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fire_weapon_base.png; sourceTree = "<group>"; };
+		D642F8901F39DA1500A64029 /* fireWeapon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fireWeapon.png; sourceTree = "<group>"; };
 		D644CA371F32476D003E7BBC /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppDelegate.cpp; sourceTree = "<group>"; };
 		D644CA381F32476D003E7BBC /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D644CA391F32476D003E7BBC /* Bullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bullet.cpp; sourceTree = "<group>"; };
@@ -395,6 +408,9 @@
 				D63F00261F34681B0019920C /* iceWeapon.png */,
 				D63F00291F34762B0019920C /* ice_weapon_base.png */,
 				D6428A311F349FB800DDB1BD /* ice_bullet.png */,
+				D642F88E1F39DA1500A64029 /* fire_weapon.png */,
+				D642F88F1F39DA1500A64029 /* fire_weapon_base.png */,
+				D642F8901F39DA1500A64029 /* fireWeapon.png */,
 				521A8EA819F11F5000D177D7 /* fonts */,
 				3EACC98E19EE6D4300EB3C5E /* res */,
 			);
@@ -425,6 +441,8 @@
 				D644CA481F32476D003E7BBC /* Weapon.h */,
 				D63F001E1F3452030019920C /* IceWeapon.cpp */,
 				D63F001C1F3451E80019920C /* IceWeapon.h */,
+				D642F8881F39D2D500A64029 /* FireWeapon.cpp */,
+				D642F88D1F39D30000A64029 /* FireWeapon.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -602,8 +620,11 @@
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
 				D644CA7E1F324BB1003E7BBC /* tank.png in Resources */,
 				D644CA7A1F324BB1003E7BBC /* stone_2.png in Resources */,
+				D642F8951F39DA1500A64029 /* fireWeapon.png in Resources */,
 				D644CA861F324BB1003E7BBC /* weaponSelected.png in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
+				D642F8911F39DA1500A64029 /* fire_weapon.png in Resources */,
+				D642F8931F39DA1500A64029 /* fire_weapon_base.png in Resources */,
 				D644CA821F324BB1003E7BBC /* tower_weapon.png in Resources */,
 				D644CA7C1F324BB1003E7BBC /* stone_3.png in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
@@ -625,6 +646,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D642F8941F39DA1500A64029 /* fire_weapon_base.png in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
 				D6428A331F349FB800DDB1BD /* ice_bullet.png in Resources */,
 				D644CA731F324BB1003E7BBC /* road.png in Resources */,
@@ -633,7 +655,9 @@
 				D63F89911F33765E00D98595 /* ice_weapon.png in Resources */,
 				D644CA7D1F324BB1003E7BBC /* stone_3.png in Resources */,
 				D644CA6B1F324BB1003E7BBC /* background.png in Resources */,
+				D642F8921F39DA1500A64029 /* fire_weapon.png in Resources */,
 				D644CA851F324BB1003E7BBC /* weapon.png in Resources */,
+				D642F8961F39DA1500A64029 /* fireWeapon.png in Resources */,
 				D644CA7F1F324BB1003E7BBC /* tank.png in Resources */,
 				D644CA7B1F324BB1003E7BBC /* stone_2.png in Resources */,
 				D644CA6D1F324BB1003E7BBC /* bullet.png in Resources */,
@@ -668,6 +692,7 @@
 				D644CA511F32476D003E7BBC /* GameField.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				D644CA4F1F32476D003E7BBC /* FieldCell.cpp in Sources */,
+				D642F8891F39D2D500A64029 /* FireWeapon.cpp in Sources */,
 				D63F001F1F3452030019920C /* IceWeapon.cpp in Sources */,
 				D644CA4D1F32476D003E7BBC /* Explosion.cpp in Sources */,
 			);
@@ -680,6 +705,7 @@
 				D644CA581F32476D003E7BBC /* Tank.cpp in Sources */,
 				D644CA521F32476D003E7BBC /* GameField.cpp in Sources */,
 				D644CA561F32476D003E7BBC /* MainScene.cpp in Sources */,
+				D642F88A1F39D2D500A64029 /* FireWeapon.cpp in Sources */,
 				D644CA4A1F32476D003E7BBC /* AppDelegate.cpp in Sources */,
 				D644CA501F32476D003E7BBC /* FieldCell.cpp in Sources */,
 				D63F00201F3452030019920C /* IceWeapon.cpp in Sources */,

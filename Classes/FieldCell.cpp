@@ -51,8 +51,8 @@ FieldCell::FieldCell(Vec2 position, Point location, Size cellSize)
             this->changeState(editMode);
         }
         changed = true;
-        auto row = int(this->gridPosition.x);
-        auto column = int(this->gridPosition.y);
+//        auto row = int(this->gridPosition.x);
+//        auto column = int(this->gridPosition.y);
 //        CCLOG("Cell Field row:%d column:%d Touch Ended",row,column);
         return true;
     };
@@ -129,6 +129,11 @@ void FieldCell::setState(int state)
             this->drawSolidRect(location,
                                 location + Vec2(cellSize),
                                 Color4F(0.349f,0.784f,0.811f,0.6f));
+            break;
+        case 4:
+            this->drawSolidRect(location,
+                                location + Vec2(cellSize),
+                                Color4F(0.945f,0.352f,0.149f,0.6f));
             break;
         default:
             break;

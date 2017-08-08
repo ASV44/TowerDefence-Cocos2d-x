@@ -24,15 +24,14 @@ bool MainScene::init()
     gameField = new GameField();
     this->addChild(gameField);
     
+    this->createWeapons(gameField->getGrid());
+    
     tanksAmount = 10;
     for(int i = 0; i < tanksAmount; ++i) {
         tanks.push_back(new Tank(gameField->getGrid()));
-        this->addChild(tanks[i]);
-        this->addChild(tanks[i]->getHealthDesigner());
-        this->addChild(tanks[i]->getExplosion());
+        this->addChild(tanks[i],3);
+        this->tanks[i]->addNodes();
     }
-    
-    this->createWeapons(gameField->getGrid());
     
     this->gameField->addFieldStones();
     
@@ -206,10 +205,12 @@ void MainScene::createWeapon(float type, Point gridPosition)
         case ICE_WEAPON:
             weapons.push_back(new IceWeapon(gameField->getGrid(), gridPosition));
             break;
+        case FIRE_WEAPON:
+            weapons.push_back(new FireWeapon(gameField->getGrid(), gridPosition));
+            break;
         default:
             break;
     }
-    
     this->addChild(weapons.back(),3);
     weapons.back()->addNodes();
 }
@@ -218,6 +219,7 @@ void MainScene::affectTank(Tank *tank, Bullet *bullet)
 {
     switch (bullet->getType()) {
         case Bullet::DEFAULT_BULLET:
+        case Bullet::FIRE_BULLET:
             tank->setDamage(bullet->getDamage());
             break;
         case Bullet::ICE_BULLET:

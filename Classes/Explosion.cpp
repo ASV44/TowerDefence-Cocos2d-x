@@ -19,8 +19,8 @@ Explosion::Explosion(string fileName, Size frames, float speed)
     spriteFrames = createSpriteSheetAnimation(fileName, frames);
     //this->initWithSpriteFrame(spriteFrames.front());
 
-    this->setContentSize(Size(0.0563 * visibleSize.width,
-                         0.1 * visibleSize.height));
+    this->setContentSize(Size(0.0963 * visibleSize.width,
+                         0.2 * visibleSize.height));
     
     this->speed = speed;
     

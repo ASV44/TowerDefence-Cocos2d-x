@@ -33,7 +33,7 @@ Weapon::Weapon(Grid *grid, Point gridPosition)
     this->time = 0;
     this->delay = 0.5;
     designer = DrawNode::create();
-    drawActiveRadius(Color4F(0,0,1,0.3f));
+    drawActiveRadius(Color4F(0,0,1,0.2f));
     
 
 //    CCLOG("Weapon Position x:%f y:%f", this->getPosition().x, this->getPosition().y);
@@ -206,7 +206,7 @@ void Weapon::drawActiveRadius(Color4F color)
 void Weapon::addNodes()
 {
     this->getParent()->addChild(designer,1);
-    this->getParent()->addChild(base, 1);
+    this->getParent()->addChild(base,1);
 }
 
 void Weapon::removeFromParent()

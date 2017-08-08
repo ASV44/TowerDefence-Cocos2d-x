@@ -27,7 +27,7 @@ public:
     void changeState(int newState);
     bool inCell(Point touchPoint);
     void putWeapon();
-    enum editMode {EDIT_ROAD, EDIT_WEAPON, EDIT_ICE};
+    enum editMode {EDIT_ROAD, EDIT_WEAPON, EDIT_ICE, EDIT_FIRE};
     void setState(int state);
     int getState();
     bool hasChanged();

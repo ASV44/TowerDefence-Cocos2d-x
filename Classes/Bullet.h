@@ -16,7 +16,7 @@ USING_NS_CC;
 class Bullet : public Sprite
 {
 public:
-    Bullet(Point startPoint, Vec2 path, Point deltaPosition, int);
+    Bullet(Point startPoint, Vec2 path, Point deltaPosition, int type);
     void update();
     Vec2 getPath();
     bool isOnScreen();

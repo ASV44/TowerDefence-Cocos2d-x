@@ -34,7 +34,7 @@ Tank::Tank(Grid *grid)
     this->setVisible(false);
     this->drawHealth = DrawNode::create();
     //this->addChild(drawHealth);
-    explosion = new Explosion("explosion.png", Size(5,5), 0.05f);
+    explosion = new Explosion("explosion.png", Size(5,5), 0.025f);
     this->freezeFactor = 0;
     //CCLOG("Target x:%f y:%f",grid->getCell(target)->getCenterLocation().x,grid->getCell(target)->getCenterLocation().y);
 };
@@ -279,7 +279,11 @@ bool Tank::isFrozen()
     }
 }
 
-
+void Tank::addNodes()
+{
+    this->getParent()->addChild(drawHealth,3);
+    this->getParent()->addChild(explosion, 3);
+}
 
 
 

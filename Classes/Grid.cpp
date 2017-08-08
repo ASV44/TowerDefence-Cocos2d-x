@@ -26,17 +26,20 @@ Grid::Grid(Point startPoint, Point endPoint)
     cellSize = Size(0.044 * visibleSize.width,
                     0.0781 * visibleSize.height);
     
-    size.width = round((endPoint.y - startPoint.y) / cellSize.height);
-    size.height = round((endPoint.x - startPoint.x) / cellSize.width);
+//    size.width = round((endPoint.y - startPoint.y) / cellSize.height);
+//    size.height = round((endPoint.x - startPoint.x) / cellSize.width);
+    
+    size.width = ceil((endPoint.y - startPoint.y) / cellSize.height); //Number of rows
+    size.height = ceil((endPoint.x - startPoint.x) / cellSize.width); //Number of columns
     
     CCLOG("Grid width:%f height:%f", size.width, size.height);
     
-    auto correction = 0.0132 * visibleSize.width;
+//    auto correction = 0.0132 * visibleSize.width;
     
     auto width = int(size.width);
     auto height = int(size.height);
-    cellSize = Size(0.044 * visibleSize.width,
-                    0.0781 * visibleSize.height);
+    
+    auto correction = (height * cellSize.width - getContentSize().width);
     
     cells = new FieldCell**[width];
     
@@ -51,7 +54,7 @@ Grid::Grid(Point startPoint, Point endPoint)
     }
     //this->setGlobalZOrder(100);
     editMode = FieldCell::EDIT_ROAD;
-    editToolsAMount = 3;
+    editToolsAMount = 4;
     editTools = new Sprite*[editToolsAMount];
     for(int i = 0; i < editToolsAMount; ++i) {
         editTools[i] = getEditTool(i);
@@ -248,6 +251,9 @@ Sprite* Grid::getEditTool(int editMode) {
             break;
         case FieldCell::EDIT_ICE:
             return Sprite::create("iceWeapon.png");
+            break;
+        case FieldCell::EDIT_FIRE:
+            return Sprite::create("fireWeapon.png");
             break;
         default:
             return NULL;

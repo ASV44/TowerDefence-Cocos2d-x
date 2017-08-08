@@ -36,6 +36,7 @@ public:
     DrawNode *getHealthDesigner();
     void freeze(float freezeFactor);
     bool isFrozen();
+    void addNodes();
     
 private:
     Grid *grid;
