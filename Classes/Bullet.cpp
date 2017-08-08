@@ -17,7 +17,6 @@ Bullet::Bullet(Point startPoint, Vec2 path, Point deltaPosition, int type)
     this->setPosition(startPoint);
     this->setContentSize(Size(0.00704 * visibleSize.width,
                               0.0125 * visibleSize.height));
-    this->setGlobalZOrder(24);
     this->path = path;
     this->deltaPosition = deltaPosition;
     this->type = type;
@@ -75,16 +74,19 @@ void Bullet::initBullet(int type)
             this->initWithFile("bullet.png");
             this->damage = 34;
             this->speed = 2.5;
+            this->freeze = 0;
             break;
         case ICE_BULLET:
             this->initWithFile("ice_bullet.png");
             this->damage = 0;
             this->speed = 2.5;
+            this->freeze = 1.5;
             break;
         case FIRE_BULLET:
             this->initWithFile("fire_bullet.png");
             this->damage = 50;
             this->speed = 3;
+            this->freeze = 0;
             break;
         default:
             break;

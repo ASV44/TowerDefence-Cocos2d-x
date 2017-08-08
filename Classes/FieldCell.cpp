@@ -53,7 +53,7 @@ FieldCell::FieldCell(Vec2 position, Point location, Size cellSize)
         changed = true;
         auto row = int(this->gridPosition.x);
         auto column = int(this->gridPosition.y);
-        CCLOG("Cell Field row:%d column:%d Touch Ended",row,column);
+//        CCLOG("Cell Field row:%d column:%d Touch Ended",row,column);
         return true;
     };
     

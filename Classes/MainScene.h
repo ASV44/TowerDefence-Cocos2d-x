@@ -22,6 +22,7 @@ public:
     void filterWeapons(vector<Point> newGridWeapons);
     void addNewWeapons(vector<FieldCell*> newGridWeapons);
     void createWeapon(float type, Point gridPosition);
+    void affectTank(Tank *tank, Bullet *bullet);
     // implement the "static create()" method manually
     CREATE_FUNC(MainScene);
 private:

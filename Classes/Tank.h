@@ -34,6 +34,8 @@ public:
     Explosion* getExplosion();
     void rotate();
     DrawNode *getHealthDesigner();
+    void freeze(float freezeFactor);
+    bool isFrozen();
     
 private:
     Grid *grid;
@@ -50,6 +52,7 @@ private:
     float activeRadius;
     DrawNode *drawHealth;
     Explosion *explosion;
+    float freezeFactor;
     
 };
 

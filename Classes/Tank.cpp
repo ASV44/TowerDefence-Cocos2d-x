@@ -35,7 +35,7 @@ Tank::Tank(Grid *grid)
     this->drawHealth = DrawNode::create();
     //this->addChild(drawHealth);
     explosion = new Explosion("explosion.png", Size(5,5), 0.05f);
-    
+    this->freezeFactor = 0;
     //CCLOG("Target x:%f y:%f",grid->getCell(target)->getCenterLocation().x,grid->getCell(target)->getCenterLocation().y);
 };
 
@@ -64,7 +64,9 @@ void Tank::move()
             this->reset();
         }
     }
-    
+    if(isFrozen()) {
+        freezeFactor = 0;
+    }
 }
 
 void Tank::moveTo(Point target)
@@ -111,8 +113,8 @@ void Tank::moveTo(Point target)
             break;
     }
     
-    this->setPositionX(getPositionX() + speed * cos(angle * M_PI / 180));
-    this->setPositionY(getPositionY() + speed * sin(-angle * M_PI / 180));
+    this->setPositionX(getPositionX() + (speed - freezeFactor) * cos(angle * M_PI / 180));
+    this->setPositionY(getPositionY() + (speed - freezeFactor) * sin(-angle * M_PI / 180));
     showHealth();
 }
 
@@ -262,7 +264,20 @@ DrawNode* Tank::getHealthDesigner()
     return drawHealth;
 }
 
+void Tank::freeze(float freezeFactor)
+{
+    this->freezeFactor = freezeFactor;
+}
 
+bool Tank::isFrozen()
+{
+    if(freezeFactor != 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
 
 
 

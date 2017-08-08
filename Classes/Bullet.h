@@ -24,6 +24,7 @@ public:
     enum bulletType {DEFAULT_BULLET, ICE_BULLET, FIRE_BULLET};
     CC_SYNTHESIZE(int, type, Type);
     void initBullet(int type);
+    CC_SYNTHESIZE(float, freeze, Freeze);
 
 private:
     Vec2 path;

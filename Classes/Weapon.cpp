@@ -141,7 +141,7 @@ void Weapon::fire(Point target)
     
     auto bullet = new Bullet(selfPosition, path, deltaPosition, Bullet::DEFAULT_BULLET);
     bullets.push_back(bullet);
-    this->getParent()->addChild(bullet);
+    this->getParent()->addChild(bullet,2);
 }
 
 float Weapon::getAngle(Point target, float distance)

@@ -106,8 +106,7 @@ void MainScene::checkColision(vector<Bullet*> bullets)
                bulletPosition.y >= tankPosition.y - tankActiveRadius &&
                bulletPosition.y <= tankPosition.y + tankActiveRadius)
             {
-                tanks[j]->setDamage(bullets[i]->getDamage());
-                bullets[i]->setVisible(false);
+                affectTank(tanks[j], bullets[i]);
                 if(tanks[j]->getHealth() <= 0) {
                     tanks[j]->expload();
                     tanks[j]->reset();
@@ -211,11 +210,26 @@ void MainScene::createWeapon(float type, Point gridPosition)
             break;
     }
     
-    this->addChild(weapons.back(),2);
+    this->addChild(weapons.back(),3);
     weapons.back()->addNodes();
 }
 
-
+void MainScene::affectTank(Tank *tank, Bullet *bullet)
+{
+    switch (bullet->getType()) {
+        case Bullet::DEFAULT_BULLET:
+            tank->setDamage(bullet->getDamage());
+            break;
+        case Bullet::ICE_BULLET:
+            if(!tank->isFrozen()) {
+                tank->freeze(bullet->getFreeze());
+            }
+            
+        default:
+            break;
+    }
+    bullet->setVisible(false);
+}
 
 
 
