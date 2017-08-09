@@ -11,16 +11,17 @@
 
 #include "Grid.h"
 #include "Bullet.h"
+#include "GameObject.h"
 
 USING_NS_CC;
 
-class Weapon : public Sprite
+class Weapon : public GameObject
 {
 public:
     Weapon(Grid *grid ,Point griPosition);
     Sprite *getBase();
     void rotate();
-    Point findTarget();
+    virtual Point findTarget();
     float distanceTo(Point target);
     void update(float delta);
     virtual void fire(Point target);

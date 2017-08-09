@@ -8,13 +8,13 @@
 
 #include "Weapon.h"
 
-Weapon::Weapon(Grid *grid, Point gridPosition)
+Weapon::Weapon(Grid *grid, Point gridPosition) : GameObject("tower_weapon.png", GameObject::WEAPON)
 {
     auto visibleSize = Director::getInstance()->getVisibleSize();
     origin = Director::getInstance()->getVisibleOrigin();
     
     this->grid = grid;
-    this->initWithFile("tower_weapon.png");
+    //this->initWithFile("tower_weapon.png");
     auto location = grid->getCell(gridPosition)->getCenterLocation() + origin;
     this->setPosition(location);
     this->setContentSize(Size(0.0167 * visibleSize.width,

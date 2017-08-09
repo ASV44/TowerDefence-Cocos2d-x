@@ -120,7 +120,7 @@ void GameField::addFieldStones()
             stones[i] = Sprite::create("stone_" + to_string(i + 1) + ".png");
             stones[i]->setAnchorPoint(Vec2(0,0));
             setStonesLocation(i);
-            this->getParent()->addChild(stones[i]);
+            this->getParent()->addChild(stones[i],4);
             //stones[i]->setGlobalZOrder(50);
         }
     }

@@ -12,12 +12,13 @@
 #include "Grid.h"
 #include <ctime>
 #include "Explosion.h"
+#include "GameObject.h"
 
 using namespace std;
 
 USING_NS_CC;
 
-class Tank: public Sprite
+class Tank: public GameObject
 {
 public:
     Tank(Grid *grid);
@@ -37,6 +38,7 @@ public:
     void freeze(float freezeFactor);
     bool isFrozen();
     void addNodes();
+    void update(float delta);
     
 private:
     Grid *grid;

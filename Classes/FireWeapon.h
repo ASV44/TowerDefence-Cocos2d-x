@@ -16,6 +16,7 @@ class FireWeapon : public Weapon {
 public:
     FireWeapon(Grid *grid, Point gridPosition);
     void fire(Point target);
+    Point findTarget();
 
 private:
     

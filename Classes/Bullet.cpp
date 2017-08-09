@@ -89,7 +89,7 @@ void Bullet::initBullet(int type)
         case FIRE_BULLET:
             this->initWithFile("fire_bullet.png");
             this->damage = 100;
-            this->speed = 3;
+            this->speed = 5;
             this->freeze = 0;
             this->setContentSize(Size(0.0265 * visibleSize.height,
                                       0.0475 * visibleSize.width));

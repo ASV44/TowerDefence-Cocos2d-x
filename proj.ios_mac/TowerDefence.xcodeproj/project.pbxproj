@@ -57,6 +57,8 @@
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
+		D63D61CD1F3B278C00378C20 /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D63D61CC1F3B278C00378C20 /* GameObject.cpp */; };
+		D63D61CE1F3B278C00378C20 /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D63D61CC1F3B278C00378C20 /* GameObject.cpp */; };
 		D63F001F1F3452030019920C /* IceWeapon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D63F001E1F3452030019920C /* IceWeapon.cpp */; };
 		D63F00201F3452030019920C /* IceWeapon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D63F001E1F3452030019920C /* IceWeapon.cpp */; };
 		D63F00271F34681B0019920C /* iceWeapon.png in Resources */ = {isa = PBXBuildFile; fileRef = D63F00261F34681B0019920C /* iceWeapon.png */; };
@@ -218,6 +220,8 @@
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		D63D61CC1F3B278C00378C20 /* GameObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameObject.cpp; sourceTree = "<group>"; };
+		D63D61CF1F3B27A600378C20 /* GameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameObject.h; sourceTree = "<group>"; };
 		D63F001C1F3451E80019920C /* IceWeapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IceWeapon.h; sourceTree = "<group>"; };
 		D63F001E1F3452030019920C /* IceWeapon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IceWeapon.cpp; sourceTree = "<group>"; };
 		D63F00261F34681B0019920C /* iceWeapon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iceWeapon.png; sourceTree = "<group>"; };
@@ -425,6 +429,8 @@
 				D644CA381F32476D003E7BBC /* AppDelegate.h */,
 				D644CA431F32476D003E7BBC /* MainScene.cpp */,
 				D644CA441F32476D003E7BBC /* MainScene.h */,
+				D63D61CC1F3B278C00378C20 /* GameObject.cpp */,
+				D63D61CF1F3B27A600378C20 /* GameObject.h */,
 				D644CA451F32476D003E7BBC /* Tank.cpp */,
 				D644CA461F32476D003E7BBC /* Tank.h */,
 				D644CA3F1F32476D003E7BBC /* GameField.cpp */,
@@ -541,6 +547,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0500;
+				TargetAttributes = {
+					1D6058900D05DD3D006BFB54 = {
+						DevelopmentTeam = GEW7T3V9U6;
+					};
+				};
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "TowerDefence" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -695,6 +706,7 @@
 				D642F8891F39D2D500A64029 /* FireWeapon.cpp in Sources */,
 				D63F001F1F3452030019920C /* IceWeapon.cpp in Sources */,
 				D644CA4D1F32476D003E7BBC /* Explosion.cpp in Sources */,
+				D63D61CD1F3B278C00378C20 /* GameObject.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -704,6 +716,7 @@
 			files = (
 				D644CA581F32476D003E7BBC /* Tank.cpp in Sources */,
 				D644CA521F32476D003E7BBC /* GameField.cpp in Sources */,
+				D63D61CE1F3B278C00378C20 /* GameObject.cpp in Sources */,
 				D644CA561F32476D003E7BBC /* MainScene.cpp in Sources */,
 				D642F88A1F39D2D500A64029 /* FireWeapon.cpp in Sources */,
 				D644CA4A1F32476D003E7BBC /* AppDelegate.cpp in Sources */,
@@ -739,6 +752,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
+				DEVELOPMENT_TEAM = GEW7T3V9U6;
 				ENABLE_BITCODE = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
@@ -772,6 +786,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
+				DEVELOPMENT_TEAM = GEW7T3V9U6;
 				ENABLE_BITCODE = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

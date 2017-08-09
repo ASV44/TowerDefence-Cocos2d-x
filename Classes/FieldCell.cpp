@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include "FieldCell.h"
+#include "Grid.h"
 
 FieldCell::FieldCell(Vec2 position, Point location, Size cellSize)
 {
@@ -115,6 +116,11 @@ void FieldCell::setState(int state)
 {
     this->clear();
     switch (state) {
+        case 0:
+            this->drawRect(location,
+                           location + Vec2(cellSize),
+                           Color4F(1,0,0,0.6f));
+            break;
         case 1:
             this->drawSolidRect(location,
                                 location + Vec2(cellSize),
@@ -150,3 +156,59 @@ void FieldCell::setChanged(bool changed)
 {
     this->changed = changed;
 }
+
+void FieldCell::setTankState(bool tankState)
+{
+    auto grid = static_cast<Grid*>(this->getParent());
+    if(tankState) {
+        grid->getTanksGridPositions().push_back(gridPosition);
+    }
+    else {
+        auto position = find(grid->getTanksGridPositions().begin(),
+                             grid->getTanksGridPositions().end(),
+                             gridPosition);
+        if(position != grid->getTanksGridPositions().end()) {
+            grid->getTanksGridPositions().erase(position);
+        }
+    }
+    this->tankState = tankState;
+}
+
+bool FieldCell::getTankState()
+{
+    return this->tankState;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

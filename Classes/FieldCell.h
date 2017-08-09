@@ -10,6 +10,8 @@
 #define FieldCell_h
 
 #include "cocos2d.h"
+//#include "Tank.h"
+//#include "Weapon.h"
 
 USING_NS_CC;
 
@@ -23,7 +25,6 @@ public:
     CC_SYNTHESIZE(Size, cellSize, CellSize);
     CC_SYNTHESIZE(Point, centerLocation, CenterLocation);
     CC_SYNTHESIZE(int, editMode, EditMode);
-    CC_SYNTHESIZE(bool, tankState, TankState);
     void changeState(int newState);
     bool inCell(Point touchPoint);
     void putWeapon();
@@ -32,11 +33,16 @@ public:
     int getState();
     bool hasChanged();
     void setChanged(bool changed);
+    void setTankState(bool tankState);
+    bool getTankState();
+//    CC_SYNTHESIZE(Tank*, tank, CellTank);
+//    CC_SYNTHESIZE(Weapon*, weapon, CellWeapon);
 
 private:
     int state;
     EventListenerTouchOneByOne *listener;
     bool changed;
+    bool tankState;
 };
 
 #endif /* FieldCell_h */

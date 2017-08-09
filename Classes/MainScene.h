@@ -24,6 +24,7 @@ public:
     void addNewWeapons(vector<FieldCell*> newGridWeapons);
     void createWeapon(float type, Point gridPosition);
     void affectTank(Tank *tank, Bullet *bullet);
+    void castSceneObjects();
     // implement the "static create()" method manually
     CREATE_FUNC(MainScene);
 private:
@@ -32,9 +33,9 @@ private:
     int tanksAmount;
     enum weaponsType {DEFAULT_WEAPON = 2, ICE_WEAPON, FIRE_WEAPON};
     vector<Weapon*> weapons;
-    //vector<IceWeapon*> iceWeapons;
     bool updateSceneWeapons;
     void updateWeaponsOnScene();
+    vector<GameObject*> gameObjects;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

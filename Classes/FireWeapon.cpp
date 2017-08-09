@@ -39,3 +39,34 @@ void FireWeapon::fire(Point target)
     bullets.push_back(bullet);
     this->getParent()->addChild(bullet,2);
 }
+
+Point FireWeapon::findTarget()
+{
+    Point target = Point(-1,-1);
+    
+    auto gridSize = grid->getGridSize();
+    auto width = int(gridSize.width);
+    auto height = int(gridSize.height);
+    float minDistance = -1;
+    
+    for(int i = 0; i < width; i++) {
+        for(int j = 0; j < height; j++) {
+            auto cell = grid->getCell(Point(i,j));
+            if(cell->getTankState()) {
+                auto distance = distanceTo(cell->getCenterLocation());
+                if(distance <= activeRadius &&
+                   (distance < minDistance || minDistance == -1)){
+                    minDistance = distance;
+                    target = cell->getCenterLocation();
+                }
+            }
+        }
+    }
+    if(target != Point(-1,-1)) {
+        angle = getAngle(target, minDistance);
+        setRotation(angle);
+        //rotate(angle);
+    }
+    
+    return target;
+}

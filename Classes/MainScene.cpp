@@ -28,9 +28,9 @@ bool MainScene::init()
     
     tanksAmount = 10;
     for(int i = 0; i < tanksAmount; ++i) {
-        tanks.push_back(new Tank(gameField->getGrid()));
-        this->addChild(tanks[i],3);
-        this->tanks[i]->addNodes();
+        gameObjects.push_back(new Tank(gameField->getGrid()));
+        this->addChild(gameObjects.back(),3);
+        this->gameObjects.back()->addNodes();
     }
     
     this->gameField->addFieldStones();
@@ -40,6 +40,8 @@ bool MainScene::init()
     this->scheduleUpdate();
     
     this->updateSceneWeapons = false;
+    
+    this->castSceneObjects();
     
     auto listener = EventListenerTouchOneByOne::create();
     //listener->setSwallowTouches(true);
@@ -80,15 +82,12 @@ bool MainScene::init()
 
 void MainScene::update(float delta) {
     if(!gameField->isOnDebug()) {
-        for(int i = 0; i < weapons.size(); i++)
+        for(int i = 0; i < gameObjects.size(); i++)
         {
-            checkColision(weapons[i]->getBullets());
-            weapons[i]->update(delta);
-        }
-        for(int i = 0; i < tanks.size(); i++) {
-            if(tanks[i]->canMove()) {
-                tanks[i]->move();
+            if(gameObjects[i]->getType() == GameObject::WEAPON) {
+                checkColision(gameObjects[i]->castObject<Weapon>()->getBullets());
             }
+            gameObjects[i]->update(delta);
         }
     }
 }
@@ -172,10 +171,11 @@ void MainScene::filterWeapons(vector<Point> newGridWeapons)
 {
     int deletedWeapons = 0;
     
-    for(int i = 0; i < weapons.size(); i++) {
-        if(find(newGridWeapons.begin(), newGridWeapons.end(), weapons[i]->getGridPosition()) == newGridWeapons.end()) {
-            auto weapon = weapons[i - deletedWeapons];
-            weapons.erase(weapons.begin() + i - deletedWeapons);
+    for(int i = 0; i < gameObjects.size(); i++) {
+        if(gameObjects[i]->getType() == GameObject::WEAPON &&
+           find(newGridWeapons.begin(), newGridWeapons.end(), gameObjects[i]->castObject<Weapon>()->getGridPosition()) == newGridWeapons.end()) {
+            auto weapon = gameObjects[i - deletedWeapons]->castObject<Weapon>();
+            gameObjects.erase(gameObjects.begin() + i - deletedWeapons);
             weapon->removeFromParent();
             weapon->dropBullets();
             weapon->release();
@@ -199,20 +199,20 @@ void MainScene::createWeapon(float type, Point gridPosition)
     int weaponType = int(type);
     switch (weaponType) {
         case DEFAULT_WEAPON:
-            weapons.push_back(new Weapon(gameField->getGrid(), gridPosition));
+            gameObjects.push_back(new Weapon(gameField->getGrid(), gridPosition));
 
             break;
         case ICE_WEAPON:
-            weapons.push_back(new IceWeapon(gameField->getGrid(), gridPosition));
+           gameObjects.push_back(new IceWeapon(gameField->getGrid(), gridPosition));
             break;
         case FIRE_WEAPON:
-            weapons.push_back(new FireWeapon(gameField->getGrid(), gridPosition));
+            gameObjects.push_back(new FireWeapon(gameField->getGrid(), gridPosition));
             break;
         default:
             break;
     }
-    this->addChild(weapons.back(),3);
-    weapons.back()->addNodes();
+    this->addChild(gameObjects.back(),3);
+    gameObjects.back()->addNodes();
 }
 
 void MainScene::affectTank(Tank *tank, Bullet *bullet)
@@ -233,7 +233,21 @@ void MainScene::affectTank(Tank *tank, Bullet *bullet)
     bullet->setVisible(false);
 }
 
-
+void MainScene::castSceneObjects()
+{
+    for(int i = 0; i < gameObjects.size(); ++i) {
+        switch (gameObjects[i]->getType()) {
+//            case GameObject::WEAPON:
+//                weapons.push_back(gameObjects[i]->castObject<Weapon>());
+//                break;
+            case GameObject::TANK:
+                tanks.push_back(gameObjects[i]->castObject<Tank>());
+                break;
+            default:
+                break;
+        }
+    }
+}
 
 
 

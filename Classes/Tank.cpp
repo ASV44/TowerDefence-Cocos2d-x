@@ -9,14 +9,14 @@
 #include <stdio.h>
 #include "Tank.h"
 
-Tank::Tank(Grid *grid)
+Tank::Tank(Grid *grid) : GameObject("tank.png", GameObject::TANK)
 {
     this->grid = grid;
     
     auto visibleSize = Director::getInstance()->getVisibleSize();
     origin = Director::getInstance()->getVisibleOrigin();
     
-    this->initWithFile("tank.png");
+    //this->initWithFile("tank.png");
     this->tankSize = Size(0.03785 * visibleSize.width,
                          0.06406 * visibleSize.height);
     this->setContentSize(tankSize);
@@ -38,6 +38,13 @@ Tank::Tank(Grid *grid)
     this->freezeFactor = 0;
     //CCLOG("Target x:%f y:%f",grid->getCell(target)->getCenterLocation().x,grid->getCell(target)->getCenterLocation().y);
 };
+
+void Tank::update(float delta)
+{
+    if(this->canMove()) {
+        this->move();
+    }
+}
 
 void Tank::move()
 {
