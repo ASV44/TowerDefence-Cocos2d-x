@@ -58,22 +58,19 @@ Point Weapon::findTarget()
 {
     Point target = Point(-1,-1);
     
-    auto gridSize = grid->getGridSize();
-    auto width = int(gridSize.width);
-    auto height = int(gridSize.height);
+//    auto gridSize = grid->getGridSize();
+//    auto width = int(gridSize.width);
+//    auto height = int(gridSize.height);
     float minDistance = -1;
     
-    for(int i = 0; i < width; i++) {
-        for(int j = 0; j < height; j++) {
-            auto cell = grid->getCell(Point(i,j));
-            if(cell->getTankState()) {
-               auto distance = distanceTo(cell->getCenterLocation());
-               if(distance <= activeRadius &&
-                   (distance < minDistance || minDistance == -1)){
-                    minDistance = distance;
-                    target = cell->getCenterLocation();
-                }
-            }
+    auto tanksPositions = *grid->getTanksGridPositions();
+    for(int i = 0; i < tanksPositions.size(); i++) {
+        auto cell = grid->getCell(tanksPositions[i]);
+        auto distance = distanceTo(cell->getCenterLocation());
+        if(distance <= activeRadius &&
+           (distance < minDistance || minDistance == -1)){
+            minDistance = distance;
+            target = cell->getCenterLocation();
         }
     }
     if(target != Point(-1,-1)) {
@@ -88,7 +85,6 @@ Point Weapon::findTarget()
 float Weapon::distanceTo(Point target)
 {
     auto selfPosition = this->getPosition() - origin;
-    
     return sqrt(pow(target.x - selfPosition.x, 2) +
                 pow(target.y - selfPosition.y, 2));
 }
@@ -99,6 +95,7 @@ void Weapon::update(float delta)
     vector<int> deleteBullets;
     
     auto target = findTarget();
+    //auto target = Point(-1,-1);
     //CCLOG("Weapon row:%f column:%f Target row:%f column:%f",gridPosition.x,gridPosition.y,target.x,target.y);
     if(time != 0) {
         time += delta;
@@ -122,6 +119,7 @@ void Weapon::update(float delta)
     if(deleteBullets.size() > 0) {
         dropBullets(deleteBullets);
     }
+//    log("Time %f Delay %f", time, delay);
 //    if(bullets.size() >= 1) {
 //    CCLOG("Weapon x:%f y:%f Bullet 0 x:%f y:%f",this->getPosition().x,this->getPosition().y,
 //                                                bullets[0]->getPosition().x, bullets[0]->getPosition().y);

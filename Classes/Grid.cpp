@@ -52,6 +52,7 @@ Grid::Grid(Point startPoint, Point endPoint)
             this->addChild(cells[i][j]);
         }
     }
+    tanksGridPositions = new vector<Point>();
     //this->setGlobalZOrder(100);
     editMode = FieldCell::EDIT_ROAD;
     editToolsAMount = 4;

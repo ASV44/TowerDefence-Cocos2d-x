@@ -21,14 +21,15 @@ FireWeapon::FireWeapon(Grid *grid, Point gridPosition) : Weapon(grid, gridPositi
                                     0.064 * visibleSize.height));
     drawActiveRadius(Color4F(0.945f,0.352f,0.149f,0.2f));
     
-    this->delay = 1;
+    this->delay = 2.5;
+    target = NULL;
+    time = 0.0001;
 }
 
 void FireWeapon::fire(Point target)
 {
     auto path = Vec2();
     auto selfPosition = this->getPosition();
-    target = target + origin;
     auto deltaPosition = target - selfPosition;
     
     path.x = (target.y - selfPosition.y) / (target.x - selfPosition.x);
@@ -42,31 +43,35 @@ void FireWeapon::fire(Point target)
 
 Point FireWeapon::findTarget()
 {
-    Point target = Point(-1,-1);
-    
-    auto gridSize = grid->getGridSize();
-    auto width = int(gridSize.width);
-    auto height = int(gridSize.height);
+    Point targetPosition = Point(-1,-1);
     float minDistance = -1;
-    
-    for(int i = 0; i < width; i++) {
-        for(int j = 0; j < height; j++) {
-            auto cell = grid->getCell(Point(i,j));
-            if(cell->getTankState()) {
-                auto distance = distanceTo(cell->getCenterLocation());
-                if(distance <= activeRadius &&
-                   (distance < minDistance || minDistance == -1)){
-                    minDistance = distance;
-                    target = cell->getCenterLocation();
-                }
+    if(this->target == NULL) {
+        auto tanksPositions = *grid->getTanksGridPositions();
+        for(int i = 0; i < tanksPositions.size(); i++) {
+            auto cell = grid->getCell(tanksPositions[i]);
+            auto distance = distanceTo(cell->getCellObject()->getPosition() - origin);
+            if(distance <= activeRadius &&
+               (distance < minDistance || minDistance == -1)){
+                minDistance = distance;
+                targetPosition = cell->getCellObject()->getPosition();
+                target = cell->getCellObject();
+                time = 0.0001;
             }
         }
     }
-    if(target != Point(-1,-1)) {
-        angle = getAngle(target, minDistance);
+    else if(distanceTo(target->getPosition() - origin) <= activeRadius) {
+        targetPosition = this->target->getPosition();
+        minDistance = distanceTo(target->getPosition() - origin);
+    }
+    else {
+        target = NULL;
+    }
+    
+    if(targetPosition != Point(-1,-1)) {
+        angle = getAngle(targetPosition - origin, minDistance);
         setRotation(angle);
         //rotate(angle);
     }
     
-    return target;
+    return targetPosition;
 }

@@ -38,7 +38,7 @@ public:
     void changeEditMode();
     void setCellsEditMode();
     bool hasChanged();
-    CC_SYNTHESIZE(vector<Point>, tanksGridPositions, TanksGridPositions);//Coordinates in grid of cells which are ocuppated with tank
+    CC_SYNTHESIZE(vector<Point>*, tanksGridPositions, TanksGridPositions);//Coordinates in grid of cells which are ocuppated with tank
     
 private:
     FieldCell ***cells;

@@ -156,8 +156,9 @@ void MainScene::updateWeaponsOnScene()
 bool MainScene::weaponExist(Point gridPosition)
 {
     bool weaponExist = false;
-    for(int k = 0; k < weapons.size(); k++) {
-        if(weapons[k]->getGridPosition() == gridPosition)
+    for(int k = 0; k < gameObjects.size(); k++) {
+        if(gameObjects[k]->getType() == GameObject::WEAPON &&
+           gameObjects[k]->castObject<Weapon>()->getGridPosition() == gridPosition)
         {
             weaponExist = true;
             break;
@@ -172,8 +173,8 @@ void MainScene::filterWeapons(vector<Point> newGridWeapons)
     int deletedWeapons = 0;
     
     for(int i = 0; i < gameObjects.size(); i++) {
-        if(gameObjects[i]->getType() == GameObject::WEAPON &&
-           find(newGridWeapons.begin(), newGridWeapons.end(), gameObjects[i]->castObject<Weapon>()->getGridPosition()) == newGridWeapons.end()) {
+        if(gameObjects[i - deletedWeapons]->getType() == GameObject::WEAPON &&
+           find(newGridWeapons.begin(), newGridWeapons.end(), gameObjects[i - deletedWeapons]->castObject<Weapon>()->getGridPosition()) == newGridWeapons.end()) {
             auto weapon = gameObjects[i - deletedWeapons]->castObject<Weapon>();
             gameObjects.erase(gameObjects.begin() + i - deletedWeapons);
             weapon->removeFromParent();

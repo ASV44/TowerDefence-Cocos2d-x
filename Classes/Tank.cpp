@@ -64,8 +64,8 @@ void Tank::move()
             auto previousPosition = gridPosition;
             gridPosition = target;
             target = getTarget(previousPosition);
-            grid->getCell(previousPosition)->setTankState(false);
-            grid->getCell(gridPosition)->setTankState(true);
+            grid->getCell(previousPosition)->dropCellObject();
+            grid->getCell(gridPosition)->setCellObject(this);
         }
         else {
             this->reset();
@@ -186,7 +186,7 @@ float Tank::getActiveRadius()
 
 void Tank::reset()
 {
-    grid->getCell(gridPosition)->setTankState(false);
+    grid->getCell(gridPosition)->dropCellObject();
     this->gridPosition = Point(4,0);
     this->target = Point(4,1);
     this->setPosition(Point(origin.x,
@@ -224,7 +224,7 @@ bool Tank::canMove()
     
     if(canMove && !this->isVisible()) {
         this->setVisible(true);
-        grid->getCell(gridPosition)->setTankState(true);
+        grid->getCell(gridPosition)->setCellObject(this);
         drawHealth->setVisible(true);
     }
     

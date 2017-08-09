@@ -19,7 +19,7 @@ public:
     Point findTarget();
 
 private:
-    
+    GameObject *target;
 };
 
 #endif /* FireWeapon_h */

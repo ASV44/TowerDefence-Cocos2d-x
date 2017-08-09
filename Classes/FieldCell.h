@@ -10,8 +10,7 @@
 #define FieldCell_h
 
 #include "cocos2d.h"
-//#include "Tank.h"
-//#include "Weapon.h"
+#include "GameObject.h"
 
 USING_NS_CC;
 
@@ -35,14 +34,17 @@ public:
     void setChanged(bool changed);
     void setTankState(bool tankState);
     bool getTankState();
-//    CC_SYNTHESIZE(Tank*, tank, CellTank);
-//    CC_SYNTHESIZE(Weapon*, weapon, CellWeapon);
+    void setCellObject(GameObject *gameObject);
+    GameObject* getCellObject();
+    void dropCellObject();
+    
 
 private:
     int state;
     EventListenerTouchOneByOne *listener;
     bool changed;
     bool tankState;
+    GameObject* cellObject;
 };
 
 #endif /* FieldCell_h */

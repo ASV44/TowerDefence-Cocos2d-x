@@ -161,14 +161,14 @@ void FieldCell::setTankState(bool tankState)
 {
     auto grid = static_cast<Grid*>(this->getParent());
     if(tankState) {
-        grid->getTanksGridPositions().push_back(gridPosition);
+        grid->getTanksGridPositions()->push_back(gridPosition);
     }
     else {
-        auto position = find(grid->getTanksGridPositions().begin(),
-                             grid->getTanksGridPositions().end(),
+        auto position = find(grid->getTanksGridPositions()->begin(),
+                             grid->getTanksGridPositions()->end(),
                              gridPosition);
-        if(position != grid->getTanksGridPositions().end()) {
-            grid->getTanksGridPositions().erase(position);
+        if(position != grid->getTanksGridPositions()->end()) {
+            grid->getTanksGridPositions()->erase(position);
         }
     }
     this->tankState = tankState;
@@ -179,11 +179,26 @@ bool FieldCell::getTankState()
     return this->tankState;
 }
 
+void FieldCell::setCellObject(GameObject* gameObject)
+{
+    this->cellObject = gameObject;
+    if(cellObject->getType() == GameObject::TANK) {
+        setTankState(true);
+    }
+}
 
+GameObject* FieldCell::getCellObject()
+{
+    return this->cellObject;
+}
 
-
-
-
+void FieldCell::dropCellObject()
+{
+    this->cellObject = NULL;
+    if(tankState) {
+        setTankState(false);
+    }
+}
 
 
 
