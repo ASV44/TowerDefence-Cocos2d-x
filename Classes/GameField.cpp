@@ -85,17 +85,20 @@ void GameField::setStonesLocation(int stone)
         case 0:
             stones[stone]->setContentSize(Size(0.0387 * visibleSize.width,
                                            0.0484 * visibleSize.height));
-            stones[stone]->setPosition(Vec2(origin.x + 83.074928, origin.y + 116.650040));
+            stones[stone]->setPosition(Vec2(0.173 * visibleSize.width, 0.4313 * visibleSize.height) +
+                                       Vec2(origin.x, origin.y));
             break;
         case 1:
             stones[stone]->setContentSize(Size(0.0669 * visibleSize.width,
                                                0.1703 * visibleSize.height));
-            stones[stone]->setPosition(Vec2(origin.x + 411.267273, origin.y + 109.900589));
+            stones[stone]->setPosition(Vec2(0.856 * visibleSize.width, 0.4064 * visibleSize.height) +
+                                       Vec2(origin.x, origin.y));
             break;
         case 2:
             stones[stone]->setContentSize(Size(0.0589 * visibleSize.width,
                                                0.142 * visibleSize.height));
-            stones[stone]->setPosition(Vec2(origin.x + 40.890820, origin.y + 99.776390));
+            stones[stone]->setPosition(Vec2(0.08518 * visibleSize.width, 0.3689 * visibleSize.height) +
+                                       Vec2(origin.x, origin.y));
             break;
             
         default:

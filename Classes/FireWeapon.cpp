@@ -21,7 +21,7 @@ FireWeapon::FireWeapon(Grid *grid, Point gridPosition) : Weapon(grid, gridPositi
                                     0.064 * visibleSize.height));
     drawActiveRadius(Color4F(0.945f,0.352f,0.149f,0.2f));
     
-    this->delay = 2.5;
+    this->delay = 1.5;
     target = NULL;
     time = 0.0001;
 }

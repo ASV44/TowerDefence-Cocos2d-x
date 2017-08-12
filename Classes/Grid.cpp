@@ -59,8 +59,8 @@ Grid::Grid(Point startPoint, Point endPoint)
     editTools = new Sprite*[editToolsAMount];
     for(int i = 0; i < editToolsAMount; ++i) {
         editTools[i] = getEditTool(i);
-        editTools[i]->setPosition(Vec2(origin.x + (0.625 + i * 0.1041) * visibleSize.width,
-                                      origin.y - 0.0258 * visibleSize.height));
+        editTools[i]->setPosition(Vec2((0.625 + i * 0.1041) * visibleSize.width,
+                                      0.0658 * visibleSize.height));
         editTools[i]->setContentSize(Size(0.066 * visibleSize.width,
                                           0.1171 * visibleSize.height));
         //editTools[i]->setGlobalZOrder(100);

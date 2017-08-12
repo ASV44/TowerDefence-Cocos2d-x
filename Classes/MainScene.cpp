@@ -20,6 +20,9 @@ bool MainScene::init()
     
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    
+    log("Visible SIze width:%f height:%f", visibleSize.width, visibleSize.height);
+    log("Origin x:%f y:%f", origin.x, origin.y);
 
     gameField = new GameField();
     this->addChild(gameField);
@@ -35,7 +38,7 @@ bool MainScene::init()
     
     this->gameField->addFieldStones();
     
-    this->addChild(gameField->getGrid());
+    this->addChild(gameField->getGrid(),5);
     
     this->scheduleUpdate();
     
