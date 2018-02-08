@@ -34,6 +34,11 @@ private:
     Sprite **stones;
     void setStonesLocation(int stone);
     Vec2 origin;
+    #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
+    const float TOUCH_TIME_FOR_DEBUG = 0.11;
+    #else
+    const float TOUCH_TIME_FOR_DEBUG = 0.8;
+    #endif
 };
 
 

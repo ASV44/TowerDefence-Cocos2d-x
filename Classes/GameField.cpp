@@ -55,7 +55,7 @@ GameField::GameField()
         log("Game Field Touch End");
         time  = (clock() - time) / CLOCKS_PER_SEC;
         CCLOG("Time %f", time);
-        if(time >= 0.8) {
+        if(time >= TOUCH_TIME_FOR_DEBUG) {
             changeMode();
         }
         return true;
